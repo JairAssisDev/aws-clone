@@ -19,6 +19,15 @@ const VOICE_STORAGE_KEY = 'aws-course-voice';
 export class ReaderService {
   readonly groups: TocGroup[] = [
     {
+      label: 'Guia CLF-C02 (estudo completo)',
+      items: [
+        { id: 'dominio-1', title: 'Domínio 1: Conceitos de Nuvem (24%)' },
+        { id: 'dominio-2', title: 'Domínio 2: Segurança e Conformidade (30%)' },
+        { id: 'dominio-3', title: 'Domínio 3: Tecnologia e Serviços AWS (34%)' },
+        { id: 'dominio-4', title: 'Domínio 4: Cobrança, Preços e Suporte (12%)' },
+      ],
+    },
+    {
       label: 'Reforço dos simulados',
       items: [
         { id: 'estrategia', title: 'Estratégia de prova' },
@@ -63,20 +72,11 @@ export class ReaderService {
         { id: 'guia-gestao', title: 'Gestão, custos e otimização' },
       ],
     },
-    {
-      label: 'Guia CLF-C02 (estudo completo)',
-      items: [
-        { id: 'dominio-1', title: 'Domínio 1: Conceitos de Nuvem (24%)' },
-        { id: 'dominio-2', title: 'Domínio 2: Segurança e Conformidade (30%)' },
-        { id: 'dominio-3', title: 'Domínio 3: Tecnologia e Serviços AWS (34%)' },
-        { id: 'dominio-4', title: 'Domínio 4: Cobrança, Preços e Suporte (12%)' },
-      ],
-    },
   ];
 
   readonly topics: TocItem[] = this.groups.flatMap((group) => group.items);
 
-  readonly activeId = signal('estrategia');
+  readonly activeId = signal('dominio-1');
   readonly state = signal<ReaderState>('stopped');
   readonly readingId = signal<string | null>(null);
 

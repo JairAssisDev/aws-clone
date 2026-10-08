@@ -16,13 +16,13 @@ describe('ReaderService', () => {
 
   it('should navigate to the next topic', () => {
     service.next();
-    expect(service.activeId()).toBe('visao');
+    expect(service.activeId()).toBe('dominio-2');
     expect(service.state()).toBe('stopped');
   });
 
   it('should navigate to the previous topic and stop at the first one', () => {
     service.previous();
-    expect(service.activeId()).toBe('estrategia');
+    expect(service.activeId()).toBe('dominio-1');
 
     service.select('caf');
     service.previous();
@@ -34,14 +34,14 @@ describe('ReaderService', () => {
   });
 
   it('should not go beyond the last topic', () => {
-    service.select('dominio-4');
+    service.select('guia-gestao');
     service.next();
-    expect(service.activeId()).toBe('dominio-4');
+    expect(service.activeId()).toBe('guia-gestao');
   });
 
   it('should ignore unknown topic ids', () => {
     service.setActive('nao-existe');
-    expect(service.activeId()).toBe('estrategia');
+    expect(service.activeId()).toBe('dominio-1');
   });
 
   it('should show the active topic title when stopped', () => {

@@ -19,7 +19,7 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Reforço: os temas em que mais se erra',
+      'Guia de Estudos Completo: AWS Certified Cloud Practitioner (CLF-C02)',
     );
     expect(compiled.querySelector('app-sidebar')).toBeTruthy();
     expect(compiled.querySelector('app-reader-bar')).toBeTruthy();
@@ -31,9 +31,11 @@ describe('App', () => {
 
     expect(compiled.querySelectorAll('section').length).toBe(24);
     expect(compiled.querySelectorAll('.doc-sumario').length).toBe(1);
+    expect(compiled.querySelectorAll('h1').length).toBe(6);
     const headings = Array.from(compiled.querySelectorAll('h1')).map((h) => h.textContent);
-    expect(headings.some((t) => t?.includes('AWS Certified Cloud Practitioner (CLF-C02)'))).toBe(
-      true,
-    );
+    const clf = 'Guia de Estudos Completo: AWS Certified Cloud Practitioner (CLF-C02)';
+    const reforco = 'Reforço: os temas em que mais se erra';
+    expect(headings[0]?.includes(clf)).toBe(true);
+    expect(headings[1]?.includes(reforco)).toBe(true);
   });
 });
