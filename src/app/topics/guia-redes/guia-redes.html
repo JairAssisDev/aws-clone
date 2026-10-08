@@ -1,0 +1,34 @@
+<section id="guia-redes">
+  <h2>11. Redes e Distribuição Global</h2>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Interligar Redes</h4>
+      <div class="anchor">CONEXÃO</div>
+      <div class="q">"Comunicação privada"</div>
+      <p>
+        <b>VPC Peering:</b> Cabo esticado entre duas VPCs (não transitivo).
+        <br />
+        <b>Transit Gateway:</b> Hub central que liga várias VPCs e On-Premises.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Distribuição</h4>
+      <div class="anchor">LATÊNCIA E REDE</div>
+      <div class="q">"Mais rápido para o cliente"</div>
+      <p>
+        <b>CloudFront:</b> Faz cache estático (CDN).
+        <br />
+        <b>Global Accelerator:</b> Usa a rede dedicada da AWS para IPs estáticos e failover rápido.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>HPC</h4>
+      <div class="anchor">ALTO DESEMPENHO</div>
+      <div class="q">"Processar big data"</div>
+      <p>
+        <b>Elastic Fabric Adapter (EFA):</b> Adaptador de rede para instâncias que precisam de
+        latência baixíssima.
+      </p>
+    </div>
+  </div>
+</section>

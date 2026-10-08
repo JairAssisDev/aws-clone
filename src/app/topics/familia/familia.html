@@ -1,0 +1,68 @@
+<section id="familia">
+  <h2>2. Qual banco de dados para cada caso</h2>
+  <p class="lead">A AWS tem um banco "certo" para cada tipo de dado. Procure a palavra-âncora:</p>
+  <table>
+    <tr>
+      <th>Serviço</th>
+      <th>Tipo</th>
+      <th>Palavra-âncora no enunciado</th>
+    </tr>
+    <tr>
+      <td><b>Amazon RDS</b></td>
+      <td>Relacional gerenciado</td>
+      <td>MySQL, PostgreSQL, SQL Server, Oracle, "tabelas com relacionamentos"</td>
+    </tr>
+    <tr>
+      <td><b>Amazon Aurora</b></td>
+      <td>Relacional da AWS</td>
+      <td>"compatível com MySQL e PostgreSQL", alto desempenho</td>
+    </tr>
+    <tr>
+      <td><b>Amazon DynamoDB</b></td>
+      <td>NoSQL chave-valor</td>
+      <td>"latência de milissegundos de um dígito", serverless, escala massiva</td>
+    </tr>
+    <tr>
+      <td><b>Amazon ElastiCache</b></td>
+      <td>Cache em memória</td>
+      <td>"cache", "microssegundos", Redis/Memcached</td>
+    </tr>
+    <tr>
+      <td><b>Amazon Neptune</b></td>
+      <td>Grafo</td>
+      <td>"relacionamentos", redes sociais, detecção de fraude em grafo</td>
+    </tr>
+    <tr>
+      <td><b>Amazon DocumentDB</b></td>
+      <td>Documentos</td>
+      <td>"compatível com MongoDB"</td>
+    </tr>
+    <tr>
+      <td><b>Amazon Keyspaces</b></td>
+      <td>Colunas largas</td>
+      <td>"compatível com Apache Cassandra"</td>
+    </tr>
+  </table>
+
+  <div class="quick">
+    <div class="lbl">TESTE RÁPIDO</div>
+    <p>
+      Relacional → <b>RDS / Aurora</b>. Chave-valor rápido → <b>DynamoDB</b>. Cache →
+      <b>ElastiCache</b>. Grafo → <b>Neptune</b>.
+    </p>
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Um aplicativo de jogos precisa de um banco NoSQL serverless com latência de milissegundos de
+      um dígito. Qual serviço?
+    </summary>
+    <div class="opts">
+      A) Amazon RDS · B) Amazon Aurora · C) Amazon DynamoDB · D) Amazon Neptune
+    </div>
+    <div class="answer">
+      <b class="ok">C — Amazon DynamoDB.</b>
+      NoSQL chave-valor, serverless e com latência de milissegundos de um dígito.
+    </div>
+  </details>
+</section>

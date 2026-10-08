@@ -1,0 +1,114 @@
+<section id="dominio-2">
+  <h2>Domínio 2: Segurança e Conformidade (30%)</h2>
+
+  <h3>2.1 Modelo de Responsabilidade Compartilhada</h3>
+  <p>Determina as fronteiras de segurança entre a AWS e o cliente.</p>
+  <ul>
+    <li>
+      <b>Responsabilidade DA AWS ("Segurança DA Nuvem"):</b>
+      <ul>
+        <li>Proteção física e segurança dos data centers.</li>
+        <li>Hardware e infraestrutura de rede física.</li>
+        <li>Software do hipervisor que executa a virtualização.</li>
+        <li>Manutenção dos serviços gerenciados (ex: Amazon S3, DynamoDB, RDS).</li>
+      </ul>
+    </li>
+    <li>
+      <b>Responsabilidade DO CLIENTE ("Segurança NA Nuvem"):</b>
+      <ul>
+        <li>Dados armazenados na AWS.</li>
+        <li>Gerenciamento de Identidade e Acesso (IAM) e senhas.</li>
+        <li>Configuração de Firewalls (<i>Security Groups</i> e <i>Network ACLs</i>).</li>
+        <li>Atualizações e patches do Sistema Operacional em instâncias EC2.</li>
+        <li>Criptografia de dados (<i>In-Transit</i> e <i>At-Rest</i>).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>2.2 Gerenciamento de Identidade e Acesso (AWS IAM)</h3>
+  <p>Serviço gratuito central para controlar quem tem acesso a quais recursos na conta AWS.</p>
+  <ul>
+    <li>
+      <b>Conceitos Fundamentais:</b>
+      <ul>
+        <li>
+          <b>Usuário Root:</b> Conta criada no primeiro registro na AWS. Possui acesso irrestrito.
+          Deve ser protegida com MFA e usada apenas para tarefas administrativas essenciais.
+        </li>
+        <li>
+          <b>IAM Users (Usuários):</b> Entidades criadas para representação de pessoas ou aplicações
+          que interagem com a AWS.
+        </li>
+        <li>
+          <b>IAM Groups (Grupos):</b> Coleção de usuários para aplicar permissões idênticas de forma
+          simplificada.
+        </li>
+        <li>
+          <b>IAM Roles (Funções):</b> Identidades com permissões temporárias assumidas por pessoas,
+          aplicações ou serviços AWS (ex: permitir que um EC2 acesse o S3).
+        </li>
+        <li>
+          <b>Políticas (Policies):</b> Documentos JSON que definem o que é permitido (<i>Allow</i>)
+          ou negado (<i>Deny</i>).
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>Princípio do Menor Privilégio (<i>Least Privilege</i>):</b> Conceder apenas o nível mínimo
+      de permissão necessário para a realização de uma tarefa específica.
+    </li>
+    <li>
+      <b>MFA (Autenticação de Múltiplos Fatores):</b> Camada adicional de segurança exigindo um
+      segundo fator de autenticação para login.
+    </li>
+  </ul>
+
+  <h3>2.3 Serviços de Segurança Integrados</h3>
+  <ul>
+    <li>
+      <b>AWS WAF (Web Application Firewall):</b> Protege aplicações web contra exploits comuns da
+      web e bots (proteção na Camada 7 - Aplicação).
+    </li>
+    <li>
+      <b>AWS Shield:</b> Proteção contra ataques de negação de serviço distribuída (DDoS). O nível
+      <i>Standard</i> é gratuito para todos os recursos; o nível <i>Advanced</i> oferece proteção
+      contra ataques complexos e mitigação personalizada.
+    </li>
+    <li>
+      <b>AWS KMS (Key Management Service):</b> Serviço gerenciado para criação e controle de chaves
+      de criptografia usadas para proteger dados.
+    </li>
+    <li>
+      <b>AWS Secrets Manager:</b> Gerencia, rotaciona e recupera com segurança credenciais de banco
+      de dados, chaves de API e outras chaves de acesso.
+    </li>
+    <li>
+      <b>AWS Cognito:</b> Fornece autenticação, autorização e gerenciamento de usuários para
+      aplicações web e móveis.
+    </li>
+    <li>
+      <b>AWS GuardDuty:</b> Serviço de detecção de ameaças inteligente que monitora continuamente
+      atividades maliciosas e comportamentos não autorizados na conta.
+    </li>
+    <li>
+      <b>Amazon Inspector:</b> Gerenciamento automatizado de vulnerabilidades que analisa cargas de
+      trabalho (como instâncias EC2 e imagens de contêineres).
+    </li>
+  </ul>
+
+  <h3>2.4 Conformidade e Auditoria</h3>
+  <ul>
+    <li>
+      <b>AWS Artifact:</b> Portal centralizado sob demanda para download de documentos de
+      conformidade (relatórios SOC, PCI-DSS, ISO) e contratos com a AWS.
+    </li>
+    <li>
+      <b>AWS CloudTrail:</b> Registra, monitora e retém o histórico de todas as chamadas de API
+      feitas na conta AWS (quem fez o quê, quando e de onde).
+    </li>
+    <li>
+      <b>AWS Config:</b> Registra e avalia continuamente as configurações dos recursos da AWS para
+      garantir conformidade com regras internas e políticas de governança.
+    </li>
+  </ul>
+</section>

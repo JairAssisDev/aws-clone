@@ -1,0 +1,107 @@
+<div class="reader-bar" role="group" aria-label="Leitor de voz do curso">
+  <select
+    class="topic-select"
+    title="Ir para um tópico"
+    aria-label="Selecionar tópico"
+    [value]="reader.activeId()"
+    (change)="onTopicChange($event)"
+  >
+    @for (group of reader.groups; track group.label) {
+      <optgroup [label]="group.label">
+        @for (item of group.items; track item.id) {
+          <option [value]="item.id">{{ item.title }}</option>
+        }
+      </optgroup>
+    }
+  </select>
+
+  <div class="reader-info">
+    <span class="reader-state" [class.playing]="reader.state() === 'playing'">
+      {{ reader.stateLabel() }}
+    </span>
+    <span class="reader-title">{{ reader.currentTitle() }}</span>
+  </div>
+
+  <select
+    class="voice-select"
+    title="Voz da leitura"
+    aria-label="Voz da leitura"
+    [value]="reader.voiceName() ?? ''"
+    [disabled]="!reader.supported || reader.voices().length === 0"
+    (change)="onVoiceChange($event)"
+  >
+    @for (voice of reader.voices(); track voice.name) {
+      <option [value]="voice.name">{{ voice.name }}</option>
+    }
+    @if (reader.voices().length === 0) {
+      <option value="">Vozes indisponíveis</option>
+    }
+  </select>
+
+  <div class="reader-actions">
+    <button
+      type="button"
+      class="btn"
+      title="Tópico anterior"
+      aria-label="Tópico anterior"
+      (click)="reader.previous()"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="5" y="6" width="2.4" height="12" rx="1" />
+        <path
+          d="M19 6.6v10.8a1 1 0 0 1-1.55.83l-8.1-5.4a1 1 0 0 1 0-1.66l8.1-5.4A1 1 0 0 1 19 6.6z"
+        />
+      </svg>
+    </button>
+
+    <button
+      type="button"
+      class="btn primary"
+      [attr.title]="reader.state() === 'playing' ? 'Pausar leitura' : 'Ler tópico'"
+      [attr.aria-label]="reader.state() === 'playing' ? 'Pausar leitura' : 'Ler tópico'"
+      [disabled]="!reader.supported"
+      (click)="reader.toggle()"
+    >
+      @if (reader.state() === 'playing') {
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <rect x="7" y="5.5" width="3.6" height="13" rx="1.2" />
+          <rect x="13.4" y="5.5" width="3.6" height="13" rx="1.2" />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M8 5.4v13.2a1 1 0 0 0 1.54.84l10.2-6.6a1 1 0 0 0 0-1.68L9.54 4.56A1 1 0 0 0 8 5.4z"
+          />
+        </svg>
+      }
+    </button>
+
+    <button
+      type="button"
+      class="btn danger"
+      title="Parar leitura"
+      aria-label="Parar leitura"
+      [disabled]="reader.state() === 'stopped'"
+      (click)="reader.stop()"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="6.5" y="6.5" width="11" height="11" rx="1.8" />
+      </svg>
+    </button>
+
+    <button
+      type="button"
+      class="btn"
+      title="Próximo tópico"
+      aria-label="Próximo tópico"
+      (click)="reader.next()"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="16.6" y="6" width="2.4" height="12" rx="1" />
+        <path
+          d="M5 6.6v10.8a1 1 0 0 0 1.55.83l8.1-5.4a1 1 0 0 0 0-1.66l-8.1-5.4A1 1 0 0 0 5 6.6z"
+        />
+      </svg>
+    </button>
+  </div>
+</div>

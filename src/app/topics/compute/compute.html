@@ -1,0 +1,149 @@
+<section id="compute">
+  <h2>6. Computação: contêineres, Outposts e opções de compra do EC2</h2>
+
+  <h3>Do código-fonte ao contêiner rodando</h3>
+  <div class="grid">
+    <div class="card amber">
+      <h4>AWS App Runner</h4>
+      <div class="anchor">CÓDIGO → CONTÊINER, TUDO AUTOMÁTICO</div>
+      <p>
+        Pega o <b>código-fonte</b> (ou uma imagem), <b>cria a imagem de contêiner</b>, implanta e
+        escala a aplicação web. Totalmente gerenciado.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Amazon ECS</h4>
+      <div class="anchor">ORQUESTRAR CONTÊINERES</div>
+      <p>
+        Executa e gerencia contêineres, mas espera uma <b>imagem já pronta</b>. Não cria a imagem a
+        partir do código sozinho.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>AWS Elastic Beanstalk</h4>
+      <div class="anchor">PaaS PARA APLICAÇÕES</div>
+      <p>
+        Implanta aplicações (Java, Python, Node…) cuidando da infraestrutura. Nas provas,
+        <b>não</b> é a resposta para "criar imagens de contêiner a partir do código".
+      </p>
+    </div>
+  </div>
+
+  <div class="quick">
+    <div class="lbl">TESTE RÁPIDO</div>
+    <p>
+      "<b>criar automaticamente imagens de contêiner a partir do código-fonte</b>" →
+      <b>App Runner</b>.
+    </p>
+    <p>"orquestrar/executar contêineres" → <b>ECS</b> (ou EKS se falar em Kubernetes).</p>
+    <p>
+      "subir uma aplicação sem gerenciar servidores, sem falar em contêiner" →
+      <b>Elastic Beanstalk</b>.
+    </p>
+  </div>
+
+  <h3>AWS Outposts</h3>
+  <p>
+    Quando a aplicação precisa <b>ficar no local (on-premises)</b> por conformidade, mas a empresa
+    quer usar EC2 e APIs da AWS, a resposta é <b>AWS Outposts</b>: a AWS instala o hardware dela no
+    seu data center. <i>Dedicated Instances</i> são hardware dedicado, mas <b>dentro da AWS</b>;
+    CloudFront é CDN; Fargate é serverless para contêineres, também na AWS.
+  </p>
+
+  <h3>Opções de compra do EC2</h3>
+  <table>
+    <tr>
+      <th>Opção</th>
+      <th>Desconto</th>
+      <th>Pode ser interrompida?</th>
+      <th>Quando usar</th>
+    </tr>
+    <tr>
+      <td>On-Demand</td>
+      <td>nenhum</td>
+      <td>não</td>
+      <td>curto prazo, imprevisível, testes</td>
+    </tr>
+    <tr>
+      <td><b>Reserved Instance Standard</b></td>
+      <td>o maior (até 72%)</td>
+      <td>não</td>
+      <td>uso contínuo por 1 ou 3 anos, <b>família e tipo fixos</b></td>
+    </tr>
+    <tr>
+      <td>Reserved Instance Convertible</td>
+      <td>menor que a Standard</td>
+      <td>não</td>
+      <td>precisa trocar família/tipo durante o contrato</td>
+    </tr>
+    <tr>
+      <td>Compute Savings Plans</td>
+      <td>alto, com flexibilidade</td>
+      <td>não</td>
+      <td>compromisso em US$/hora, qualquer família/Região</td>
+    </tr>
+    <tr>
+      <td>Spot</td>
+      <td>até 90%</td>
+      <td><b>sim</b> (aviso de 2 min)</td>
+      <td>cargas tolerantes a interrupção</td>
+    </tr>
+  </table>
+
+  <p>
+    <b>Forma de pagamento:</b> nas Reservas, <b>All Upfront</b> (tudo adiantado) dá o maior
+    desconto, depois Partial Upfront e No Upfront.
+  </p>
+
+  <div class="trap">
+    <b>Armadilha 1:</b> "sem interrupção + o mais econômico" → <b>Reserved Instance Standard</b>
+    (On-Demand também não é interrompido, mas é o mais caro; Spot é o mais barato, mas pode ser
+    interrompido).
+    <br />
+    <b>Armadilha 2:</b> "24/7 por 12 meses, <b>mesma família e tipo</b>, maximizar economia (escolha
+    duas)" → <b>RI Standard + pagamento All Upfront</b>. O Savings Plan dá flexibilidade que o
+    cenário não precisa, com desconto menor.
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer publicar uma aplicação web a partir de um repositório no GitHub sem escrever
+      Dockerfile nem gerenciar clusters; o serviço deve construir e implantar automaticamente. Qual
+      serviço?
+    </summary>
+    <div class="opts">A) Amazon ECS · B) AWS App Runner · C) Amazon EC2 · D) AWS Batch</div>
+    <div class="answer">
+      <b class="ok">B — App Runner.</b>
+      Do código-fonte à aplicação rodando, sem gerenciar infraestrutura.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Um banco de dados roda 24/7 e continuará igual (mesmo tipo de instância) pelos próximos 3
+      anos. Qual opção de compra é a mais econômica?
+    </summary>
+    <div class="opts">
+      A) On-Demand · B) Spot · C) Reserved Instance Standard · D) Dedicated Host On-Demand
+    </div>
+    <div class="answer">
+      <b class="ok">C — RI Standard.</b>
+      Uso contínuo, previsível e sem troca de tipo = maior desconto.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Um hospital precisa manter os dados dos pacientes no próprio prédio, mas quer usar as mesmas
+      APIs e ferramentas da AWS. O que usar?
+    </summary>
+    <div class="opts">
+      A) AWS Outposts · B) Dedicated Instances · C) AWS Direct Connect · D) Amazon CloudFront
+    </div>
+    <div class="answer">
+      <b class="ok">A — Outposts.</b>
+      Infraestrutura da AWS dentro do seu local. Direct Connect é só uma conexão de rede dedicada
+      até a AWS (veja o material <i>Outposts vs Direct Connect</i>).
+    </div>
+  </details>
+</section>

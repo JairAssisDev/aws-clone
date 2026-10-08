@@ -1,0 +1,84 @@
+<section id="caf">
+  <h2>5. AWS CAF e suporte operacional</h2>
+  <p class="lead">
+    Duas confusões: quais tarefas o CAF recomenda para uma transformação organizacional, e qual
+    serviço dá <b>suporte operacional</b> em escala.
+  </p>
+
+  <h3>Transformação organizacional (AWS CAF)</h3>
+  <p>
+    Para ficar <b>mais responsiva aos clientes</b>, o CAF recomenda duas ações de transformação
+    organizacional:
+  </p>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Realinhar equipes</h4>
+      <div class="anchor">PRODUTOS E FLUXOS DE VALOR</div>
+      <p>
+        Organizar as equipes em torno de <b>produtos e fluxos de valor</b>, não de silos técnicos.
+      </p>
+    </div>
+    <div class="card amber">
+      <h4>Métodos ágeis</h4>
+      <div class="anchor">ITERAR RÁPIDO</div>
+      <p>Usar <b>métodos ágeis</b> para iterar e evoluir rapidamente com base no feedback.</p>
+    </div>
+  </div>
+
+  <div class="trap">
+    <b>Armadilha:</b> a pergunta pedia <b>duas</b> respostas. Marcar só uma conta como erro (veja a
+    seção 8).
+  </div>
+
+  <h3>Suporte operacional: AMS × Well-Architected × CAF × AWS Support</h3>
+  <table>
+    <tr>
+      <th>Opção</th>
+      <th>O que é</th>
+      <th>Quando é a resposta</th>
+    </tr>
+    <tr>
+      <td><b>AWS Managed Services (AMS)</b></td>
+      <td>
+        A AWS <b>opera</b> sua infraestrutura por você (monitoramento, incidentes, patches, backup,
+        segurança).
+      </td>
+      <td>
+        "adotar a AWS em escala e <b>operar</b> com mais eficiência e segurança", "suporte
+        operacional"
+      </td>
+    </tr>
+    <tr>
+      <td>Well-Architected Framework</td>
+      <td>Boas práticas para <b>projetar e revisar</b> arquiteturas.</td>
+      <td>"avaliar/revisar a arquitetura", "pilares"</td>
+    </tr>
+    <tr>
+      <td>Cloud Adoption Framework</td>
+      <td>Guia para <b>planejar</b> a jornada de adoção (6 perspectivas).</td>
+      <td>"planejar a migração", "transformação", "perspectivas"</td>
+    </tr>
+    <tr>
+      <td>AWS Support</td>
+      <td>Planos de suporte técnico (casos, TAM…).</td>
+      <td>"abrir casos", "tempo de resposta", "plano de suporte"</td>
+    </tr>
+  </table>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa que já migrou para a AWS quer que especialistas da AWS cuidem da operação diária
+      (patches, monitoramento, backups) para operar em escala com segurança. O que usar?
+    </summary>
+    <div class="opts">
+      A) AWS Well-Architected Framework · B) AWS CAF · C) AWS Managed Services (AMS) · D) AWS
+      Trusted Advisor
+    </div>
+    <div class="answer">
+      <b class="ok">C — AMS.</b>
+      Well-Architected e CAF são guias (frameworks); o AMS é um serviço que <b>opera</b> por você.
+    </div>
+  </details>
+
+  <span class="src">Baseado na documentação oficial da AWS (AWS CAF e AWS Managed Services)</span>
+</section>

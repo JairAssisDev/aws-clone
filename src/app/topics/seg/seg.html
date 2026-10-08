@@ -1,0 +1,91 @@
+<section id="seg">
+  <h2>8. Segurança e identidade</h2>
+
+  <h3>Amazon GuardDuty</h3>
+  <p>
+    <b>Detecção de ameaças</b>: analisa logs continuamente (CloudTrail, VPC Flow Logs, DNS)
+    procurando atividade maliciosa. <b>Não</b> bloqueia DDoS (isso é o Shield) nem SQL injection
+    (isso é o WAF). Revise o material <i>Segurança: os 8 serviços que confundem</i>.
+  </p>
+
+  <h3>IAM: grupos × roles × políticas individuais</h3>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Grupos de usuários do IAM</h4>
+      <div class="anchor">PERMISSÃO POR FUNÇÃO NA EMPRESA</div>
+      <p>
+        Você anexa políticas ao grupo ("Financeiro", "Dev"). Se o funcionário muda de equipe, basta
+        <b>trocá-lo de grupo</b>. Menor sobrecarga operacional.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Roles do IAM</h4>
+      <div class="anchor">CREDENCIAIS TEMPORÁRIAS</div>
+      <p>
+        Assumidas por <b>serviços</b> (EC2, Lambda), outras contas ou identidades federadas. Não são
+        a forma de organizar funcionários por equipe.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>Políticas por usuário</h4>
+      <div class="anchor">EVITAR</div>
+      <p>
+        Anexar política a cada pessoa funciona, mas gera <b>muito trabalho</b>
+        quando as pessoas mudam de equipe.
+      </p>
+    </div>
+  </div>
+
+  <h3>Amazon Cognito × IAM Identity Center</h3>
+  <table>
+    <tr>
+      <th>Serviço</th>
+      <th>Para quem</th>
+      <th>Palavra-âncora</th>
+    </tr>
+    <tr>
+      <td><b>Amazon Cognito</b></td>
+      <td><b>Clientes</b> da sua aplicação (web/mobile)</td>
+      <td>
+        "login com Google/Facebook", "usuários do app", "credenciais temporárias para acessar o S3
+        direto do app"
+      </td>
+    </tr>
+    <tr>
+      <td>AWS IAM Identity Center</td>
+      <td><b>Funcionários</b> da empresa</td>
+      <td>"single sign-on para várias contas AWS e aplicações corporativas"</td>
+    </tr>
+  </table>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa tem 50 desenvolvedores que trocam de projeto com frequência. Qual a forma com
+      menor sobrecarga operacional de gerenciar suas permissões?
+    </summary>
+    <div class="opts">
+      A) Uma política do IAM para cada usuário · B) Grupos de usuários do IAM · C) Perfis de
+      instância · D) Chaves de acesso compartilhadas
+    </div>
+    <div class="answer">
+      <b class="ok">B — Grupos.</b>
+      Troca-se o usuário de grupo e as permissões acompanham.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Um aplicativo mobile quer permitir login com conta Google e dar aos usuários acesso temporário
+      a fotos em um bucket S3. Qual serviço?
+    </summary>
+    <div class="opts">
+      A) AWS IAM Identity Center · B) Amazon Cognito · C) AWS Directory Service · D) AWS
+      Organizations
+    </div>
+    <div class="answer">
+      <b class="ok">B — Cognito.</b>
+      Identidade para usuários de aplicação, com provedores sociais e credenciais temporárias da
+      AWS.
+    </div>
+  </details>
+</section>

@@ -1,0 +1,2717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Reforço dos Simulados — AI_Mentoring
+  </title>
+  <style>
+   :root {
+    --bg: #0F1720; --surface: #17212C; --surface-2: #1F2B38; --border: #2A3846;
+    --text: #E7ECF1; --text-muted: #93A2B1;
+    --amber: #F2B705; --amber-soft: rgba(242,183,5,0.13); --amber-border: rgba(242,183,5,0.4);
+    --green: #35D399; --green-soft: rgba(53,211,153,0.12);
+    --blue: #5B8DEF; --blue-soft: rgba(91,141,239,0.13); --blue-border: rgba(91,141,239,0.45);
+    --violet: #B18CFF; --violet-soft: rgba(177,140,255,0.13); --violet-border: rgba(177,140,255,0.45);
+    --red: #E0687A;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); display: flex;
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+  .toc { width: 290px; flex-shrink: 0; height: 100vh; position: sticky; top: 0; overflow-y: auto;
+         background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; }
+  .instructor { padding: 0 22px 18px 22px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+  .instructor .name { font-weight: 700; letter-spacing: .02em; }
+  .instructor .role { font-size: .78rem; color: var(--text-muted); line-height: 1.5; margin-top: 4px; }
+  .badges-row { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+  .badges-row img { width: 52px; height: 52px; object-fit: contain; }
+  .toc-list { list-style: none; margin: 0; padding: 6px 12px; }
+  .toc-list a { display: block; padding: 8px 12px; border-left: 3px solid transparent; border-radius: 4px;
+                color: var(--text-muted); text-decoration: none; font-size: .9rem; }
+  .toc-list a:hover { background: var(--surface-2); color: var(--text); }
+  .toc-list a.active { background: var(--amber-soft); border-left-color: var(--amber); color: var(--text); }
+
+  .main { flex: 1; min-width: 0; padding: 40px 48px 90px 48px; }
+  .wrap { max-width: 900px; }
+  .eyebrow { font-size: .82rem; color: var(--text-muted); margin-bottom: 6px; }
+  h1 { font-size: 1.8rem; margin: 0 0 8px 0; }
+  .doc-sub { color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+  section { padding-top: 26px; margin-top: 26px; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.35rem; margin: 0 0 6px 0; }
+  h3 { font-size: 1.02rem; margin: 22px 0 10px 0; }
+  p { line-height: 1.65; margin: 0 0 12px 0; }
+  .lead { color: var(--text-muted); margin-bottom: 16px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 12px 0 18px; }
+  .card { border-radius: 10px; padding: 16px 18px; border: 1px solid var(--border); background: var(--surface); }
+  .card.amber { border-color: var(--amber-border); background: var(--amber-soft); }
+  .card.blue { border-color: var(--blue-border); background: var(--blue-soft); }
+  .card.violet { border-color: var(--violet-border); background: var(--violet-soft); }
+  .card h4 { margin: 0 0 4px 0; font-size: 1rem; }
+  .card .anchor { display: inline-block; font-size: .7rem; font-weight: 700; color: var(--bg); background: var(--amber);
+                  padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; }
+  .card.blue .anchor { background: var(--blue); color: #06101f; }
+  .card.violet .anchor { background: var(--violet); color: #1a0e2e; }
+  .card .q { font-style: italic; color: var(--text-muted); font-size: .86rem; margin-bottom: 6px; }
+  .card p { font-size: .9rem; margin: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: .9rem; }
+  th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .02em; }
+  td b { color: var(--amber); }
+  .bar { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; min-width: 90px; }
+  .bar span { display: block; height: 100%; background: var(--amber); }
+
+  .analogy { border-left: 4px solid var(--amber); background: var(--surface); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; }
+  .analogy .lbl, .quick .lbl { font-size: .76rem; font-weight: 700; color: var(--amber); margin-bottom: 8px; }
+  .quick { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .quick .lbl { color: var(--text-muted); }
+  .quick p { margin: 0 0 6px 0; font-size: .94rem; }
+  .quick b { color: var(--amber); }
+  .trap { border: 1px dashed var(--red); border-radius: 8px; padding: 12px 16px; margin: 14px 0; font-size: .92rem; }
+  .trap b { color: var(--red); }
+
+  .exercise { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 10px 0; }
+  .exercise summary { cursor: pointer; list-style: none; display: flex; gap: 10px; align-items: baseline; line-height: 1.55; }
+  .exercise summary::-webkit-details-marker { display: none; }
+  .exercise summary::before { content: "▸"; color: var(--amber); font-size: .85rem; transition: transform .15s; }
+  .exercise[open] summary::before { transform: rotate(90deg); }
+  .exercise .opts { margin: 8px 0 0 22px; color: var(--text-muted); font-size: .92rem; line-height: 1.7; }
+  .exercise .answer { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: .92rem; line-height: 1.6; }
+  .exercise .answer b.ok { color: var(--green); }
+  .src { display: inline-block; font-size: .72rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 12px; padding: 1px 8px; margin-top: 6px; }
+
+  @media (max-width: 860px) {
+    body { flex-direction: column; }
+    .toc { width: 100%; height: auto; position: relative; padding: 16px 0; }
+    .toc-list { display: flex; overflow-x: auto; padding: 0 12px; }
+    .toc-list li { flex-shrink: 0; }
+    .toc-list a { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+    .toc-list a.active { border-left: none; border-bottom-color: var(--amber); }
+    .main { padding: 28px 16px 80px 16px; }
+  }
+  </style>
+ </head>
+ <body>
+  <nav class="toc">
+   <ul class="toc-list">
+    <li>
+     <a href="#estrategia">
+      1. Estratégia de prova
+     </a>
+    </li>
+    <li>
+     <a href="#visao">
+      2. Onde mais se erra
+     </a>
+    </li>
+    <li>
+     <a href="#wa">
+      3. Pilares do Well-Architected
+     </a>
+    </li>
+    <li>
+     <a href="#vantagens">
+      4. Vantagens da nuvem
+     </a>
+    </li>
+    <li>
+     <a href="#caf">
+      5. CAF e suporte operacional
+     </a>
+    </li>
+    <li>
+     <a href="#compute">
+      6. Computação e compra de EC2
+     </a>
+    </li>
+    <li>
+     <a href="#ml">
+      7. IA/ML e atendimento
+     </a>
+    </li>
+    <li>
+     <a href="#seg">
+      8. Segurança e identidade
+     </a>
+    </li>
+    <li>
+     <a href="#outros">
+      9. ELB, CodeDeploy e SMB
+     </a>
+    </li>
+    <li>
+     <a href="#guia-seguranca">
+      10. Guia: Segurança
+     </a>
+    </li>
+    <li>
+     <a href="#guia-redes">
+      11. Guia: Redes
+     </a>
+    </li>
+    <li>
+     <a href="#guia-armazenamento">
+      12. Guia: Armazenamento
+     </a>
+    </li>
+    <li>
+     <a href="#guia-gestao">
+      13. Guia: Gestão
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="main">
+   <div class="wrap">
+    <div class="eyebrow">
+     AI_Mentoring — Material de reforço CLF-C02
+    </div>
+    <h1>
+     Reforço: os temas em que mais se erra
+    </h1>
+    <p class="doc-sub">
+     Este material foi montado a partir dos erros mais frequentes nos simulados da plataforma
+  (diagnóstico inicial e práticas por tema). Cada seção explica o conceito, mostra a armadilha que confundiu e termina
+  com exercícios para você praticar — clique na pergunta para ver a resposta.
+    </p>
+    <!-- ===================================================== -->
+    <section id="estrategia">
+     <h2>
+      1. Estratégia de prova
+     </h2>
+     <div class="quick">
+      <div class="lbl">
+       3 REGRAS QUE TERIAM EVITADO ERROS DA TURMA
+      </div>
+      <p>
+       <b>
+        1. "Escolha duas" = marque exatamente duas.
+       </b>
+       A pontuação é tudo ou nada: acertar uma das duas conta
+      como erro. Na plataforma e no exame real.
+      </p>
+      <p>
+       <b>
+        2. Procure a palavra-âncora antes de ler as opções.
+       </b>
+       "Consistente" → Confiabilidade.
+      "Código-fonte → contêiner" → App Runner. "Pesquisar respostas" → Kendra.
+      </p>
+      <p>
+       <b>
+        3. Elimine pelo "quase certo".
+       </b>
+       On-Demand "não interrompe", mas não é "o mais econômico"; ECS roda
+      contêiner, mas não "cria a imagem a partir do código".
+      </p>
+     </div>
+     <p>
+      Próximo passo: na plataforma, faça uma
+      <b>
+       prática por tema
+      </b>
+      de
+      <i>
+       Cloud Concepts &amp; Well-Architected
+      </i>
+      e de
+      <i>
+       Compute &amp; Containers
+      </i>
+      (10 perguntas cada) e anote as palavras-âncora das que errar.
+     </p>
+    </section>
+    <section id="visao">
+     <h2>
+      2. Onde mais se erra
+     </h2>
+     <p class="lead">
+      Os erros se concentram em poucos temas:
+     </p>
+     <table>
+      <tr>
+       <th>
+        Tema
+       </th>
+       <th>
+        O que costuma confundir
+       </th>
+      </tr>
+      <tr>
+       <td>
+        Cloud Concepts &amp; Well-Architected
+       </td>
+       <td>
+        Pilares parecidos, vantagens da nuvem, perspectivas do CAF
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Compute &amp; Containers
+       </td>
+       <td>
+        Serviços de contêiner e modelos de compra de EC2
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Data, Analytics &amp; Machine Learning
+       </td>
+       <td>
+        Serviços de IA pré-treinados vs. SageMaker
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Application Integration
+       </td>
+       <td>
+        Filas, tópicos e orquestração
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Security, Identity &amp; Compliance
+       </td>
+       <td>
+        Serviços de detecção e identidade
+       </td>
+      </tr>
+     </table>
+     <p>
+      O padrão mais comum:
+      <b>
+       confundir conceitos vizinhos
+      </b>
+      — dois pilares do Well-Architected que parecem
+    iguais, dois serviços de contêiner, dois serviços de IA. A estratégia é sempre a mesma: achar a
+      <b>
+       palavra-âncora
+      </b>
+      do enunciado.
+     </p>
+    </section>
+    <!-- ===================================================== -->
+    <section id="wa">
+     <h2>
+      3. Pilares do AWS Well-Architected Framework
+     </h2>
+     <p class="lead">
+      Foi o tema com mais erros. O Framework tem
+      <b>
+       6 pilares
+      </b>
+      . Três deles foram confundidos entre si:
+     </p>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Excelência Operacional
+       </h4>
+       <div class="anchor">
+        OPERAR E MELHORAR
+       </div>
+       <div class="q">
+        "Como eu executo, monitoro e melhoro meus processos?"
+       </div>
+       <p>
+        Executar cargas de trabalho de forma eficiente,
+        <b>
+         reduzir a sobrecarga operacional
+        </b>
+        , automatizar,
+        fazer mudanças pequenas e reversíveis, aprender com falhas. Palavras típicas:
+        <i>
+         processos, operações,
+        observabilidade, automação
+        </i>
+        .
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Confiabilidade
+       </h4>
+       <div class="anchor">
+        FUNCIONAR SEMPRE
+       </div>
+       <div class="q">
+        "A carga funciona corretamente e de forma consistente quando esperado?"
+       </div>
+       <p>
+        Definição oficial: a capacidade de uma carga de trabalho
+        <b>
+         executar sua função corretamente e de forma
+        consistente
+        </b>
+        ao longo de todo o ciclo de vida. Inclui
+        <b>
+         resiliência
+        </b>
+        : recuperar-se de falhas.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Eficiência de Performance
+       </h4>
+       <div class="anchor">
+        USAR BEM OS RECURSOS
+       </div>
+       <div class="q">
+        "Estou usando os recursos certos para ter o melhor desempenho?"
+       </div>
+       <p>
+        Selecionar o tipo e tamanho certo de recurso e manter a eficiência quando a demanda muda.
+        Palavras típicas:
+        <i>
+         serverless, experimentar, global em minutos, tecnologias avançadas como serviço
+        </i>
+        .
+       </p>
+      </div>
+     </div>
+     <p>
+      Os outros três:
+      <b>
+       Segurança
+      </b>
+      (proteger dados e sistemas),
+      <b>
+       Otimização de Custos
+      </b>
+      (evitar gastos
+    desnecessários) e
+      <b>
+       Sustentabilidade
+      </b>
+      (reduzir o impacto ambiental).
+     </p>
+     <h3>
+      Princípios de design: qual pertence a qual pilar
+     </h3>
+     <table>
+      <tr>
+       <th>
+        Princípio de design
+       </th>
+       <th>
+        Pilar
+       </th>
+      </tr>
+      <tr>
+       <td>
+        Usar arquiteturas
+        <b>
+         serverless
+        </b>
+       </td>
+       <td>
+        Eficiência de Performance
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Tornar-se global em minutos · Experimentar com mais frequência
+       </td>
+       <td>
+        Eficiência de Performance
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Escalar horizontalmente
+        </b>
+        para aumentar a disponibilidade agregada
+       </td>
+       <td>
+        Confiabilidade
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Recuperar-se automaticamente de falhas · Testar procedimentos de recuperação
+       </td>
+       <td>
+        Confiabilidade
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Fazer mudanças pequenas, frequentes e reversíveis · Automatizar com segurança
+       </td>
+       <td>
+        Excelência Operacional
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Medir a eficiência geral / o custo das cargas de trabalho
+       </td>
+       <td>
+        Otimização de Custos
+       </td>
+      </tr>
+     </table>
+     <h3>
+      Resiliência, durabilidade, elasticidade, latência
+     </h3>
+     <table>
+      <tr>
+       <th>
+        Conceito
+       </th>
+       <th>
+        Significa
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Resiliência
+        </b>
+       </td>
+       <td>
+        O
+        <b>
+         sistema
+        </b>
+        continua funcionando (e se recupera) quando enfrenta falhas ou problemas operacionais.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Durabilidade
+       </td>
+       <td>
+        Os
+        <b>
+         dados
+        </b>
+        não se perdem ao longo do tempo (ex.: 11 noves do S3). É sobre dados, não sobre o sistema.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Elasticidade
+       </td>
+       <td>
+        Aumentar e reduzir recursos automaticamente conforme a demanda.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Latência
+       </td>
+       <td>
+        Tempo de resposta. Métrica de desempenho, não de continuidade.
+       </td>
+      </tr>
+     </table>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      "funcionar corretamente e de forma consistente" parece "operação", mas é a
+    definição literal de
+      <b>
+       Confiabilidade
+      </b>
+      . Já "reduzir a sobrecarga operacional e melhorar processos" é
+      <b>
+       Excelência Operacional
+      </b>
+      .
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer que sua aplicação continue disponível mesmo que uma Zona de
+    Disponibilidade inteira falhe, recuperando-se automaticamente. Qual pilar representa esse objetivo?
+      </summary>
+      <div class="opts">
+       A) Excelência Operacional · B) Confiabilidade · C) Eficiência de Performance · D) Sustentabilidade
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Confiabilidade.
+       </b>
+       Recuperar-se de falhas e manter a carga funcionando é
+      resiliência, parte do pilar Confiabilidade.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Uma equipe quer implementar observabilidade, automatizar as implantações e aprender
+    com cada incidente para melhorar os procedimentos. Qual pilar?
+      </summary>
+      <div class="opts">
+       A) Segurança · B) Otimização de Custos · C) Excelência Operacional · D) Confiabilidade
+      </div>
+      <div class="answer">
+       <b class="ok">
+        C — Excelência Operacional.
+       </b>
+       Operar, monitorar e melhorar processos continuamente.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Qual princípio de design está alinhado com o pilar Eficiência de Performance?
+      </summary>
+      <div class="opts">
+       A) Escalar horizontalmente · B) Usar arquiteturas serverless · C) Testar procedimentos de recuperação · D) Analisar e atribuir gastos
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Usar arquiteturas serverless.
+       </b>
+       A (escalar horizontalmente) e C são de
+      Confiabilidade; D é de Otimização de Custos.
+      </div>
+     </details>
+     <span class="src">
+      Baseado na documentação oficial da AWS (AWS Well-Architected Framework)
+     </span>
+    </section>
+    <!-- ===================================================== -->
+    <section id="vantagens">
+     <h2>
+      4. Vantagens da computação em nuvem
+     </h2>
+     <p class="lead">
+      A AWS lista
+      <b>
+       6 vantagens
+      </b>
+      . As provas descrevem um cenário e pedem qual vantagem se aplica.
+     </p>
+     <table>
+      <tr>
+       <th>
+        Vantagem
+       </th>
+       <th>
+        Palavra-âncora no enunciado
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Aumentar velocidade e agilidade
+        </b>
+       </td>
+       <td>
+        "provisionar rápido", "em minutos em vez de semanas", "novos recursos para uma nova linha de negócio"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Tornar-se global em minutos
+       </td>
+       <td>
+        "usuários em vários países", "outras Regiões", "baixa latência no mundo todo"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Parar de adivinhar capacidade
+       </td>
+       <td>
+        "não sabe a demanda", "escalar conforme necessário"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Trocar despesas fixas por variáveis
+       </td>
+       <td>
+        "pagar só pelo que usa", "sem investimento inicial"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Beneficiar-se de economias de escala
+       </td>
+       <td>
+        "preços menores porque a AWS agrega muitos clientes"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Parar de gastar com data centers
+       </td>
+       <td>
+        "deixar de manter servidores e racks"
+       </td>
+      </tr>
+     </table>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      "provisionar infraestrutura adicional o mais rápido possível" é
+      <b>
+       velocidade e agilidade
+      </b>
+      , não "global em minutos". "Global" só quando o enunciado fala de
+      <b>
+       alcance geográfico
+      </b>
+      .
+     </div>
+     <div class="analogy">
+      <div class="lbl">
+       ANALOGIA
+      </div>
+      <p>
+       Testar uma aplicação na nuvem é como alugar um carro para uma viagem: você pega quando precisa, devolve
+      quando termina e
+       <b>
+        não assina um contrato de 3 anos
+       </b>
+       . Por isso o princípio que ajuda a testar é
+      "expandir e reduzir conforme necessário,
+       <b>
+        sem compromisso de longo prazo
+       </b>
+       " — não "ter controle total
+      da infraestrutura".
+      </p>
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa precisa de servidores extras para um projeto novo e, na nuvem,
+    consegue provisioná-los em minutos em vez de esperar semanas pela compra de hardware. Qual vantagem?
+      </summary>
+      <div class="opts">
+       A) Economias de escala · B) Aumentar velocidade e agilidade · C) Tornar-se global em minutos · D) Trocar despesas fixas por variáveis
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Velocidade e agilidade.
+       </b>
+       O foco é a rapidez para ter recursos, não a geografia.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer lançar sua aplicação para clientes na Europa e na Ásia com baixa
+    latência, sem construir data centers nesses países. Qual vantagem?
+      </summary>
+      <div class="opts">
+       A) Tornar-se global em minutos · B) Parar de adivinhar capacidade · C) Velocidade e agilidade · D) Economias de escala
+      </div>
+      <div class="answer">
+       <b class="ok">
+        A — Tornar-se global em minutos.
+       </b>
+       Aqui a palavra-âncora é alcance geográfico.
+      </div>
+     </details>
+    </section>
+    <!-- ===================================================== -->
+    <section id="caf">
+     <h2>
+      5. AWS CAF e suporte operacional
+     </h2>
+     <p class="lead">
+      Duas confusões: quais tarefas o CAF recomenda para uma transformação organizacional, e qual
+    serviço dá
+      <b>
+       suporte operacional
+      </b>
+      em escala.
+     </p>
+     <h3>
+      Transformação organizacional (AWS CAF)
+     </h3>
+     <p>
+      Para ficar
+      <b>
+       mais responsiva aos clientes
+      </b>
+      , o CAF recomenda duas ações de transformação organizacional:
+     </p>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Realinhar equipes
+       </h4>
+       <div class="anchor">
+        PRODUTOS E FLUXOS DE VALOR
+       </div>
+       <p>
+        Organizar as equipes em torno de
+        <b>
+         produtos e fluxos de valor
+        </b>
+        , não de silos técnicos.
+       </p>
+      </div>
+      <div class="card amber">
+       <h4>
+        Métodos ágeis
+       </h4>
+       <div class="anchor">
+        ITERAR RÁPIDO
+       </div>
+       <p>
+        Usar
+        <b>
+         métodos ágeis
+        </b>
+        para iterar e evoluir rapidamente com base no feedback.
+       </p>
+      </div>
+     </div>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      a pergunta pedia
+      <b>
+       duas
+      </b>
+      respostas. Marcar só uma conta como erro
+    (veja a seção 8).
+     </div>
+     <h3>
+      Suporte operacional: AMS × Well-Architected × CAF × AWS Support
+     </h3>
+     <table>
+      <tr>
+       <th>
+        Opção
+       </th>
+       <th>
+        O que é
+       </th>
+       <th>
+        Quando é a resposta
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Managed Services (AMS)
+        </b>
+       </td>
+       <td>
+        A AWS
+        <b>
+         opera
+        </b>
+        sua infraestrutura por você (monitoramento, incidentes, patches, backup, segurança).
+       </td>
+       <td>
+        "adotar a AWS em escala e
+        <b>
+         operar
+        </b>
+        com mais eficiência e segurança", "suporte operacional"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Well-Architected Framework
+       </td>
+       <td>
+        Boas práticas para
+        <b>
+         projetar e revisar
+        </b>
+        arquiteturas.
+       </td>
+       <td>
+        "avaliar/revisar a arquitetura", "pilares"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Cloud Adoption Framework
+       </td>
+       <td>
+        Guia para
+        <b>
+         planejar
+        </b>
+        a jornada de adoção (6 perspectivas).
+       </td>
+       <td>
+        "planejar a migração", "transformação", "perspectivas"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        AWS Support
+       </td>
+       <td>
+        Planos de suporte técnico (casos, TAM…).
+       </td>
+       <td>
+        "abrir casos", "tempo de resposta", "plano de suporte"
+       </td>
+      </tr>
+     </table>
+     <details class="exercise">
+      <summary>
+       Uma empresa que já migrou para a AWS quer que especialistas da AWS cuidem da
+    operação diária (patches, monitoramento, backups) para operar em escala com segurança. O que usar?
+      </summary>
+      <div class="opts">
+       A) AWS Well-Architected Framework · B) AWS CAF · C) AWS Managed Services (AMS) · D) AWS Trusted Advisor
+      </div>
+      <div class="answer">
+       <b class="ok">
+        C — AMS.
+       </b>
+       Well-Architected e CAF são guias (frameworks); o AMS é um
+      serviço que
+       <b>
+        opera
+       </b>
+       por você.
+      </div>
+     </details>
+     <span class="src">
+      Baseado na documentação oficial da AWS (AWS CAF e AWS Managed Services)
+     </span>
+    </section>
+    <!-- ===================================================== -->
+    <section id="compute">
+     <h2>
+      6. Computação: contêineres, Outposts e opções de compra do EC2
+     </h2>
+     <h3>
+      Do código-fonte ao contêiner rodando
+     </h3>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        AWS App Runner
+       </h4>
+       <div class="anchor">
+        CÓDIGO → CONTÊINER, TUDO AUTOMÁTICO
+       </div>
+       <p>
+        Pega o
+        <b>
+         código-fonte
+        </b>
+        (ou uma imagem),
+        <b>
+         cria a imagem de contêiner
+        </b>
+        , implanta e escala a aplicação web. Totalmente gerenciado.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Amazon ECS
+       </h4>
+       <div class="anchor">
+        ORQUESTRAR CONTÊINERES
+       </div>
+       <p>
+        Executa e gerencia contêineres, mas espera uma
+        <b>
+         imagem já pronta
+        </b>
+        . Não cria a imagem a partir do código sozinho.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        AWS Elastic Beanstalk
+       </h4>
+       <div class="anchor">
+        PaaS PARA APLICAÇÕES
+       </div>
+       <p>
+        Implanta aplicações (Java, Python, Node…) cuidando da infraestrutura. Nas provas,
+        <b>
+         não
+        </b>
+        é a resposta para "criar imagens de contêiner a partir do código".
+       </p>
+      </div>
+     </div>
+     <div class="quick">
+      <div class="lbl">
+       TESTE RÁPIDO
+      </div>
+      <p>
+       "
+       <b>
+        criar automaticamente imagens de contêiner a partir do código-fonte
+       </b>
+       " →
+       <b>
+        App Runner
+       </b>
+       .
+      </p>
+      <p>
+       "orquestrar/executar contêineres" →
+       <b>
+        ECS
+       </b>
+       (ou EKS se falar em Kubernetes).
+      </p>
+      <p>
+       "subir uma aplicação sem gerenciar servidores, sem falar em contêiner" →
+       <b>
+        Elastic Beanstalk
+       </b>
+       .
+      </p>
+     </div>
+     <h3>
+      AWS Outposts
+     </h3>
+     <p>
+      Quando a aplicação precisa
+      <b>
+       ficar no local (on-premises)
+      </b>
+      por conformidade, mas a empresa quer usar EC2 e
+    APIs da AWS, a resposta é
+      <b>
+       AWS Outposts
+      </b>
+      : a AWS instala o hardware dela no seu data center.
+      <i>
+       Dedicated Instances
+      </i>
+      são hardware dedicado, mas
+      <b>
+       dentro da AWS
+      </b>
+      ; CloudFront é CDN; Fargate é
+    serverless para contêineres, também na AWS.
+     </p>
+     <h3>
+      Opções de compra do EC2
+     </h3>
+     <table>
+      <tr>
+       <th>
+        Opção
+       </th>
+       <th>
+        Desconto
+       </th>
+       <th>
+        Pode ser interrompida?
+       </th>
+       <th>
+        Quando usar
+       </th>
+      </tr>
+      <tr>
+       <td>
+        On-Demand
+       </td>
+       <td>
+        nenhum
+       </td>
+       <td>
+        não
+       </td>
+       <td>
+        curto prazo, imprevisível, testes
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Reserved Instance Standard
+        </b>
+       </td>
+       <td>
+        o maior (até 72%)
+       </td>
+       <td>
+        não
+       </td>
+       <td>
+        uso contínuo por 1 ou 3 anos,
+        <b>
+         família e tipo fixos
+        </b>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Reserved Instance Convertible
+       </td>
+       <td>
+        menor que a Standard
+       </td>
+       <td>
+        não
+       </td>
+       <td>
+        precisa trocar família/tipo durante o contrato
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Compute Savings Plans
+       </td>
+       <td>
+        alto, com flexibilidade
+       </td>
+       <td>
+        não
+       </td>
+       <td>
+        compromisso em US$/hora, qualquer família/Região
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Spot
+       </td>
+       <td>
+        até 90%
+       </td>
+       <td>
+        <b>
+         sim
+        </b>
+        (aviso de 2 min)
+       </td>
+       <td>
+        cargas tolerantes a interrupção
+       </td>
+      </tr>
+     </table>
+     <p>
+      <b>
+       Forma de pagamento:
+      </b>
+      nas Reservas,
+      <b>
+       All Upfront
+      </b>
+      (tudo adiantado) dá o maior desconto, depois
+    Partial Upfront e No Upfront.
+     </p>
+     <div class="trap">
+      <b>
+       Armadilha 1:
+      </b>
+      "sem interrupção + o mais econômico" →
+      <b>
+       Reserved Instance Standard
+      </b>
+      (On-Demand também não é interrompido, mas é o mais caro; Spot é o mais barato, mas pode ser interrompido).
+      <br/>
+      <b>
+       Armadilha 2:
+      </b>
+      "24/7 por 12 meses,
+      <b>
+       mesma família e tipo
+      </b>
+      , maximizar economia (escolha duas)" →
+      <b>
+       RI Standard + pagamento All Upfront
+      </b>
+      . O Savings Plan dá flexibilidade que o cenário não precisa, com
+    desconto menor.
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer publicar uma aplicação web a partir de um repositório no GitHub
+    sem escrever Dockerfile nem gerenciar clusters; o serviço deve construir e implantar automaticamente. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) Amazon ECS · B) AWS App Runner · C) Amazon EC2 · D) AWS Batch
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — App Runner.
+       </b>
+       Do código-fonte à aplicação rodando, sem gerenciar infraestrutura.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Um banco de dados roda 24/7 e continuará igual (mesmo tipo de instância) pelos
+    próximos 3 anos. Qual opção de compra é a mais econômica?
+      </summary>
+      <div class="opts">
+       A) On-Demand · B) Spot · C) Reserved Instance Standard · D) Dedicated Host On-Demand
+      </div>
+      <div class="answer">
+       <b class="ok">
+        C — RI Standard.
+       </b>
+       Uso contínuo, previsível e sem troca de tipo = maior desconto.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Um hospital precisa manter os dados dos pacientes no próprio prédio, mas quer
+    usar as mesmas APIs e ferramentas da AWS. O que usar?
+      </summary>
+      <div class="opts">
+       A) AWS Outposts · B) Dedicated Instances · C) AWS Direct Connect · D) Amazon CloudFront
+      </div>
+      <div class="answer">
+       <b class="ok">
+        A — Outposts.
+       </b>
+       Infraestrutura da AWS dentro do seu local. Direct Connect é só
+      uma conexão de rede dedicada até a AWS (veja o material
+       <i>
+        Outposts vs Direct Connect
+       </i>
+       ).
+      </div>
+     </details>
+    </section>
+    <!-- ===================================================== -->
+    <section id="ml">
+     <h2>
+      7. IA/ML e atendimento ao cliente
+     </h2>
+     <p class="lead">
+      Uma pergunta de busca inteligente costuma gerar confusão. Cada serviço tem uma função bem diferente:
+     </p>
+     <table>
+      <tr>
+       <th>
+        Serviço
+       </th>
+       <th>
+        Palavra-âncora
+       </th>
+       <th>
+        Faz
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon Kendra
+        </b>
+       </td>
+       <td>
+        BUSCA INTELIGENTE
+       </td>
+       <td>
+        Pesquisa em documentos da empresa e devolve
+        <b>
+         respostas específicas
+        </b>
+        para perguntas em linguagem natural.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Amazon Lex
+       </td>
+       <td>
+        CHATBOT
+       </td>
+       <td>
+        Cria interfaces de conversa (voz e texto). É a tecnologia por trás da Alexa.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        Amazon Comprehend
+       </td>
+       <td>
+        ANALISAR TEXTO
+       </td>
+       <td>
+        Processamento de linguagem natural: sentimento, entidades, frases-chave.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon Connect
+        </b>
+       </td>
+       <td>
+        CENTRAL DE ATENDIMENTO
+       </td>
+       <td>
+        Contact center na nuvem:
+        <b>
+         voz e chat
+        </b>
+        com agentes.
+       </td>
+      </tr>
+     </table>
+     <div class="quick">
+      <div class="lbl">
+       TESTE RÁPIDO
+      </div>
+      <p>
+       "funcionários
+       <b>
+        pesquisam
+       </b>
+       perguntas e obtêm respostas" →
+       <b>
+        Kendra
+       </b>
+       .
+      </p>
+      <p>
+       "conversar com o usuário / bot" →
+       <b>
+        Lex
+       </b>
+       . "entender o
+       <b>
+        sentimento
+       </b>
+       de avaliações" →
+       <b>
+        Comprehend
+       </b>
+       .
+      </p>
+      <p>
+       "call center, agentes, voz e chat" →
+       <b>
+        Connect
+       </b>
+       . (AWS Support Center é para abrir casos com a AWS, não para atender seus clientes.)
+      </p>
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma loja quer identificar automaticamente se as avaliações dos clientes são
+    positivas ou negativas. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) Amazon Kendra · B) Amazon Lex · C) Amazon Comprehend · D) Amazon Connect
+      </div>
+      <div class="answer">
+       <b class="ok">
+        C — Comprehend.
+       </b>
+       Análise de sentimento é processamento de linguagem natural.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer um portal interno onde os funcionários digitem uma pergunta
+    ("qual a política de férias?") e recebam a resposta exata a partir dos documentos de RH. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) Amazon Kendra · B) Amazon Comprehend · C) Amazon Lex · D) Amazon Textract
+      </div>
+      <div class="answer">
+       <b class="ok">
+        A — Kendra.
+       </b>
+       Busca inteligente em documentos com resposta específica.
+      </div>
+     </details>
+    </section>
+    <!-- ===================================================== -->
+    <section id="seg">
+     <h2>
+      8. Segurança e identidade
+     </h2>
+     <h3>
+      Amazon GuardDuty
+     </h3>
+     <p>
+      <b>
+       Detecção de ameaças
+      </b>
+      : analisa logs continuamente (CloudTrail, VPC Flow Logs, DNS) procurando atividade
+    maliciosa.
+      <b>
+       Não
+      </b>
+      bloqueia DDoS (isso é o Shield) nem SQL injection (isso é o WAF). Revise o material
+      <i>
+       Segurança: os 8 serviços que confundem
+      </i>
+      .
+     </p>
+     <h3>
+      IAM: grupos × roles × políticas individuais
+     </h3>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Grupos de usuários do IAM
+       </h4>
+       <div class="anchor">
+        PERMISSÃO POR FUNÇÃO NA EMPRESA
+       </div>
+       <p>
+        Você anexa políticas ao grupo ("Financeiro", "Dev"). Se o funcionário muda de equipe, basta
+        <b>
+         trocá-lo de
+        grupo
+        </b>
+        . Menor sobrecarga operacional.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Roles do IAM
+       </h4>
+       <div class="anchor">
+        CREDENCIAIS TEMPORÁRIAS
+       </div>
+       <p>
+        Assumidas por
+        <b>
+         serviços
+        </b>
+        (EC2, Lambda), outras contas ou identidades federadas. Não são a forma de
+        organizar funcionários por equipe.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Políticas por usuário
+       </h4>
+       <div class="anchor">
+        EVITAR
+       </div>
+       <p>
+        Anexar política a cada pessoa funciona, mas gera
+        <b>
+         muito trabalho
+        </b>
+        quando as pessoas mudam de equipe.
+       </p>
+      </div>
+     </div>
+     <h3>
+      Amazon Cognito × IAM Identity Center
+     </h3>
+     <table>
+      <tr>
+       <th>
+        Serviço
+       </th>
+       <th>
+        Para quem
+       </th>
+       <th>
+        Palavra-âncora
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon Cognito
+        </b>
+       </td>
+       <td>
+        <b>
+         Clientes
+        </b>
+        da sua aplicação (web/mobile)
+       </td>
+       <td>
+        "login com Google/Facebook", "usuários do app", "credenciais temporárias para acessar o S3 direto do app"
+       </td>
+      </tr>
+      <tr>
+       <td>
+        AWS IAM Identity Center
+       </td>
+       <td>
+        <b>
+         Funcionários
+        </b>
+        da empresa
+       </td>
+       <td>
+        "single sign-on para várias contas AWS e aplicações corporativas"
+       </td>
+      </tr>
+     </table>
+     <details class="exercise">
+      <summary>
+       Uma empresa tem 50 desenvolvedores que trocam de projeto com frequência. Qual a
+    forma com menor sobrecarga operacional de gerenciar suas permissões?
+      </summary>
+      <div class="opts">
+       A) Uma política do IAM para cada usuário · B) Grupos de usuários do IAM · C) Perfis de instância · D) Chaves de acesso compartilhadas
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Grupos.
+       </b>
+       Troca-se o usuário de grupo e as permissões acompanham.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Um aplicativo mobile quer permitir login com conta Google e dar aos usuários acesso
+    temporário a fotos em um bucket S3. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) AWS IAM Identity Center · B) Amazon Cognito · C) AWS Directory Service · D) AWS Organizations
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Cognito.
+       </b>
+       Identidade para usuários de aplicação, com provedores sociais e
+      credenciais temporárias da AWS.
+      </div>
+     </details>
+    </section>
+    <!-- ===================================================== -->
+    <section id="outros">
+     <h2>
+      9. Elastic Load Balancing, CodeDeploy e armazenamento SMB
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Elastic Load Balancing
+       </h4>
+       <div class="anchor">
+        DISTRIBUIR TRÁFEGO
+       </div>
+       <p>
+        Distribui o tráfego entre
+        <b>
+         vários recursos de computação
+        </b>
+        (instâncias, contêineres, IPs). Quem
+        <b>
+         escala
+        </b>
+        as instâncias é o
+        <b>
+         Auto Scaling
+        </b>
+        , não o ELB.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        AWS CodeDeploy
+       </h4>
+       <div class="anchor">
+        IMPLANTAR
+       </div>
+       <p>
+        Automatiza a implantação de software em
+        <b>
+         EC2, servidores on-premises
+        </b>
+        , Lambda e ECS. CodePipeline
+        orquestra o fluxo; CodeBuild compila e testa.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Amazon FSx for Windows File Server
+       </h4>
+       <div class="anchor">
+        SMB / WINDOWS
+       </div>
+       <p>
+        Sistema de arquivos gerenciado acessível via
+        <b>
+         SMB
+        </b>
+        . EFS usa
+        <b>
+         NFS
+        </b>
+        (Linux); EBS é disco em
+        blocos de uma instância; S3 é armazenamento de objetos.
+       </p>
+      </div>
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer automatizar a implantação de uma nova versão da aplicação em 20
+    servidores no próprio data center e em 10 instâncias EC2. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) AWS CodeCommit · B) AWS CodeBuild · C) AWS CodeDeploy · D) AWS CodeArtifact
+      </div>
+      <div class="answer">
+       <b class="ok">
+        C — CodeDeploy.
+       </b>
+       Implanta tanto em EC2 quanto em servidores on-premises.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Servidores Linux precisam compartilhar os mesmos arquivos ao mesmo tempo, usando
+    NFS. E se fossem servidores Windows usando SMB?
+      </summary>
+      <div class="answer">
+       <b class="ok">
+        Linux/NFS → Amazon EFS. Windows/SMB → Amazon FSx for Windows File Server.
+       </b>
+      </div>
+     </details>
+    </section>
+    <!-- ===================================================== -->
+   </div>
+   <div class="wrap">
+    <div class="eyebrow">
+     AI_Mentoring — Esclarecimento de conceitos CLF-C02
+    </div>
+    <h1>
+     Bancos de dados e analytics na AWS
+    </h1>
+    <p class="doc-sub">
+     Qual serviço guarda, qual consulta e qual analisa? Este material organiza os bancos de dados da AWS por pergunta-chave, para não confundir na prova.
+    </p>
+    <section id="gerenciado">
+     <h2>
+      1. Banco gerenciado (RDS) x banco instalado no EC2
+     </h2>
+     <p class="lead">
+      A primeira decisão: quem cuida do banco de dados, você ou a AWS?
+     </p>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Amazon RDS
+       </h4>
+       <div class="anchor">
+        A AWS CUIDA
+       </div>
+       <div class="q">
+        “Quero um banco relacional sem administrar servidor?”
+       </div>
+       <p>
+        Banco relacional
+        <b>
+         gerenciado
+        </b>
+        (MySQL, PostgreSQL, MariaDB, Oracle, SQL Server). A AWS faz instalação, patches, backups automáticos e Multi-AZ. Você cuida do esquema, das consultas e dos dados.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Banco no Amazon EC2
+       </h4>
+       <div class="anchor">
+        VOCÊ CUIDA
+       </div>
+       <div class="q">
+        “Preciso de controle total do sistema operacional?”
+       </div>
+       <p>
+        Você instala o banco em uma instância EC2 e cuida de
+        <b>
+         tudo
+        </b>
+        : sistema operacional, patches, backups e alta disponibilidade. Só faz sentido quando precisa de algo que o RDS não permite.
+       </p>
+      </div>
+     </div>
+     <div class="analogy">
+      <div class="lbl">
+       ANALOGIA
+      </div>
+      <p>
+       RDS é morar em um apartamento com condomínio: a manutenção do prédio é feita por outros. Banco no EC2 é ter uma casa: você mesmo conserta o telhado.
+      </p>
+     </div>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      se o enunciado fala em
+      <b>
+       reduzir trabalho administrativo
+      </b>
+      , “patches automáticos” ou “backups automáticos” de um banco relacional, a resposta é
+      <b>
+       RDS
+      </b>
+      (ou Aurora), nunca “instâncias EC2”.
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer migrar um banco MySQL e deixar de fazer manualmente patches e backups. Qual serviço deve usar?
+      </summary>
+      <div class="opts">
+       A) Amazon EC2 · B) Amazon RDS · C) Amazon S3 · D) Amazon Redshift
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Amazon RDS.
+       </b>
+       Banco relacional gerenciado: patches e backups ficam com a AWS.
+      </div>
+     </details>
+    </section>
+    <section id="familia">
+     <h2>
+      2. Qual banco de dados para cada caso
+     </h2>
+     <p class="lead">
+      A AWS tem um banco “certo” para cada tipo de dado. Procure a palavra-âncora:
+     </p>
+     <table>
+      <tr>
+       <th>
+        Serviço
+       </th>
+       <th>
+        Tipo
+       </th>
+       <th>
+        Palavra-âncora no enunciado
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon RDS
+        </b>
+       </td>
+       <td>
+        Relacional gerenciado
+       </td>
+       <td>
+        MySQL, PostgreSQL, SQL Server, Oracle, “tabelas com relacionamentos”
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon Aurora
+        </b>
+       </td>
+       <td>
+        Relacional da AWS
+       </td>
+       <td>
+        “compatível com MySQL e PostgreSQL”, alto desempenho
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon DynamoDB
+        </b>
+       </td>
+       <td>
+        NoSQL chave-valor
+       </td>
+       <td>
+        “latência de milissegundos de um dígito”, serverless, escala massiva
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon ElastiCache
+        </b>
+       </td>
+       <td>
+        Cache em memória
+       </td>
+       <td>
+        “cache”, “microssegundos”, Redis/Memcached
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon Neptune
+        </b>
+       </td>
+       <td>
+        Grafo
+       </td>
+       <td>
+        “relacionamentos”, redes sociais, detecção de fraude em grafo
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon DocumentDB
+        </b>
+       </td>
+       <td>
+        Documentos
+       </td>
+       <td>
+        “compatível com MongoDB”
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         Amazon Keyspaces
+        </b>
+       </td>
+       <td>
+        Colunas largas
+       </td>
+       <td>
+        “compatível com Apache Cassandra”
+       </td>
+      </tr>
+     </table>
+     <div class="quick">
+      <div class="lbl">
+       TESTE RÁPIDO
+      </div>
+      <p>
+       Relacional →
+       <b>
+        RDS / Aurora
+       </b>
+       . Chave-valor rápido →
+       <b>
+        DynamoDB
+       </b>
+       . Cache →
+       <b>
+        ElastiCache
+       </b>
+       . Grafo →
+       <b>
+        Neptune
+       </b>
+       .
+      </p>
+     </div>
+     <details class="exercise">
+      <summary>
+       Um aplicativo de jogos precisa de um banco NoSQL serverless com latência de milissegundos de um dígito. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) Amazon RDS · B) Amazon Aurora · C) Amazon DynamoDB · D) Amazon Neptune
+      </div>
+      <div class="answer">
+       <b class="ok">
+        C — Amazon DynamoDB.
+       </b>
+       NoSQL chave-valor, serverless e com latência de milissegundos de um dígito.
+      </div>
+     </details>
+    </section>
+    <section id="analytics">
+     <h2>
+      3. Analytics: consultar e analisar dados
+     </h2>
+     <p class="lead">
+      Aqui o objetivo não é a aplicação gravar dados, e sim
+      <b>
+       analisar
+      </b>
+      dados que já existem.
+     </p>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Amazon Athena
+       </h4>
+       <div class="anchor">
+        SQL DIRETO NO S3
+       </div>
+       <div class="q">
+        “Quero consultar arquivos no S3 sem carregar em banco?”
+       </div>
+       <p>
+        Consultas SQL
+        <b>
+         serverless
+        </b>
+        direto sobre dados no Amazon S3. Não guarda dados e você paga pelos dados escaneados em cada consulta.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Amazon Redshift
+       </h4>
+       <div class="anchor">
+        DATA WAREHOUSE
+       </div>
+       <div class="q">
+        “Quero um armazém de dados para BI?”
+       </div>
+       <p>
+        Data warehouse:
+        <b>
+         carrega e guarda
+        </b>
+        grandes volumes de dados organizados para consultas analíticas complexas e relatórios.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Amazon QuickSight
+       </h4>
+       <div class="anchor">
+        DASHBOARDS
+       </div>
+       <div class="q">
+        “Quero ver gráficos e painéis?”
+       </div>
+       <p>
+        Serviço de BI para
+        <b>
+         visualizar
+        </b>
+        dados em painéis. Não consulta o S3 sozinho: usa fontes como Athena ou Redshift.
+       </p>
+      </div>
+     </div>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      “consultar dados no S3
+      <b>
+       sem carregá-los
+      </b>
+      em um banco e
+      <b>
+       sem provisionar
+      </b>
+      infraestrutura” é
+      <b>
+       Athena
+      </b>
+      . Redshift exige carregar os dados no data warehouse; QuickSight só mostra os resultados.
+     </div>
+     <p>
+      Para comparar Athena, Redshift e EMR com mais detalhe, veja também a página
+      <i>
+       athena-redshift-emr.html
+      </i>
+      .
+     </p>
+     <details class="exercise">
+      <summary>
+       Uma equipe quer executar SQL padrão sobre arquivos no Amazon S3, pagando apenas pelos dados analisados em cada consulta. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) Amazon Redshift · B) Amazon Athena · C) Amazon QuickSight · D) Amazon RDS
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Amazon Athena.
+       </b>
+       SQL serverless direto no S3, cobrança por dados escaneados.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer criar painéis visuais para a diretoria com os dados de vendas. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) Amazon QuickSight · B) Amazon Athena · C) Amazon Redshift · D) AWS Glue
+      </div>
+      <div class="answer">
+       <b class="ok">
+        A — Amazon QuickSight.
+       </b>
+       Painéis e gráficos de BI.
+      </div>
+     </details>
+     <span class="src">
+      Baseado na documentação oficial da AWS
+     </span>
+    </section>
+   </div>
+   <div class="wrap">
+    <div class="eyebrow">
+     AI_Mentoring — Esclarecimento de conceitos CLF-C02
+    </div>
+    <h1>
+     Migração para a AWS: estimar custos e mover
+    </h1>
+    <p class="doc-sub">
+     Antes de migrar a empresa estima o custo e descobre o que tem; depois move servidores e bancos de dados. Cada etapa tem seu serviço.
+    </p>
+    <section id="estimar">
+     <h2>
+      1. Antes de migrar: estimar e descobrir
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        AWS Pricing Calculator
+       </h4>
+       <div class="anchor">
+        ESTIMAR CUSTO
+       </div>
+       <div class="q">
+        “Quanto vão custar os serviços AWS?”
+       </div>
+       <p>
+        Calcula o custo estimado dos serviços que você pretende usar.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Migration Evaluator
+       </h4>
+       <div class="anchor">
+        CASO DE NEGÓCIO / TCO
+       </div>
+       <div class="q">
+        “Quanto economizo migrando meus servidores?”
+       </div>
+       <p>
+        Analisa o ambiente on-premises e gera um caso de negócio com o
+        <b>
+         custo total de propriedade (TCO)
+        </b>
+        projetado na AWS.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        AWS Application Discovery Service
+       </h4>
+       <div class="anchor">
+        INVENTÁRIO
+       </div>
+       <div class="q">
+        “O que existe no meu data center?”
+       </div>
+       <p>
+        Coleta dados de
+        <b>
+         uso, configuração e dependências
+        </b>
+        dos servidores locais para planejar a migração.
+       </p>
+      </div>
+     </div>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      “determinar o TCO” em questão de “Escolha duas” é quase sempre
+      <b>
+       Pricing Calculator + Migration Evaluator
+      </b>
+      . “Coletar dados de uso e configuração dos servidores” é
+      <b>
+       Application Discovery Service
+      </b>
+      , não DMS.
+     </div>
+    </section>
+    <section id="mover">
+     <h2>
+      2. Na migração: mover
+     </h2>
+     <table>
+      <tr>
+       <th>
+        Serviço
+       </th>
+       <th>
+        Move o quê
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Application Migration Service
+        </b>
+       </td>
+       <td>
+        <b>
+         Servidores
+        </b>
+        inteiros para EC2 (rehost / lift-and-shift).
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Database Migration Service (DMS)
+        </b>
+       </td>
+       <td>
+        <b>
+         Bancos de dados
+        </b>
+        , com o banco de origem funcionando durante a migração.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS DataSync
+        </b>
+       </td>
+       <td>
+        <b>
+         Arquivos
+        </b>
+        , pela rede.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Snowball Edge
+        </b>
+       </td>
+       <td>
+        Grandes volumes de dados,
+        <b>
+         fisicamente
+        </b>
+        , quando falta rede.
+       </td>
+      </tr>
+     </table>
+     <div class="quick">
+      <div class="lbl">
+       TESTE RÁPIDO
+      </div>
+      <p>
+       Custo →
+       <b>
+        Pricing Calculator / Migration Evaluator
+       </b>
+       . Inventário →
+       <b>
+        Application Discovery
+       </b>
+       . Servidor →
+       <b>
+        Application Migration Service
+       </b>
+       . Banco →
+       <b>
+        DMS
+       </b>
+       .
+      </p>
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer coletar dados de uso e configuração dos servidores do seu data center para planejar a migração. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) AWS DMS · B) AWS Application Discovery Service · C) AWS Pricing Calculator · D) AWS DataSync
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Application Discovery Service.
+       </b>
+       Faz o inventário dos servidores locais.
+      </div>
+     </details>
+     <details class="exercise">
+      <summary>
+       Uma empresa quer estimar o TCO de migrar seus servidores para a AWS. Quais ferramentas? (Escolha duas.)
+      </summary>
+      <div class="opts">
+       A) AWS Pricing Calculator · B) AWS Cost Explorer · C) Migration Evaluator · D) AWS Budgets · E) AWS DMS
+      </div>
+      <div class="answer">
+       <b class="ok">
+        A e C.
+       </b>
+       Cost Explorer e Budgets só funcionam com gastos que já existem na AWS.
+      </div>
+     </details>
+     <span class="src">
+      Baseado na documentação oficial da AWS
+     </span>
+    </section>
+   </div>
+   <div class="wrap">
+    <div class="eyebrow">
+     AI_Mentoring — Esclarecimento de conceitos CLF-C02
+    </div>
+    <h1>
+     Redes na AWS: proteger e conectar VPCs
+    </h1>
+    <p class="doc-sub">
+     Dois grupos de perguntas aparecem muito: quem filtra o tráfego (firewalls) e como conectar redes entre si.
+    </p>
+    <section id="firewalls">
+     <h2>
+      1. Quem filtra o tráfego
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Grupo de segurança
+       </h4>
+       <div class="anchor">
+        INSTÂNCIA · STATEFUL
+       </div>
+       <div class="q">
+        “Firewall da instância EC2?”
+       </div>
+       <p>
+        Atua na
+        <b>
+         instância
+        </b>
+        . É
+        <b>
+         stateful
+        </b>
+        : se a entrada foi permitida, a resposta sai sozinha. Só tem regras de
+        <b>
+         permitir
+        </b>
+        .
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Network ACL
+       </h4>
+       <div class="anchor">
+        SUB-REDE · STATELESS
+       </div>
+       <div class="q">
+        “Filtrar uma sub-rede inteira ou bloquear um IP?”
+       </div>
+       <p>
+        Atua na
+        <b>
+         sub-rede
+        </b>
+        . É
+        <b>
+         stateless
+        </b>
+        : entrada e saída precisam de regras. Tem regras de
+        <b>
+         permitir e negar
+        </b>
+        .
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        AWS WAF
+       </h4>
+       <div class="anchor">
+        APLICAÇÃO WEB (HTTP)
+       </div>
+       <div class="q">
+        “Bloquear injeção de SQL ou XSS?”
+       </div>
+       <p>
+        Firewall de
+        <b>
+         aplicação web
+        </b>
+        : filtra requisições HTTP/HTTPS no CloudFront, ALB ou API Gateway.
+       </p>
+      </div>
+     </div>
+     <table>
+      <tr>
+       <th>
+        Serviço
+       </th>
+       <th>
+        Protege contra
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Shield
+        </b>
+       </td>
+       <td>
+        Ataques
+        <b>
+         DDoS
+        </b>
+        . Standard é automático e gratuito; Advanced é pago, com proteção e suporte extras.
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Network Firewall
+        </b>
+       </td>
+       <td>
+        Firewall gerenciado para a
+        <b>
+         VPC inteira
+        </b>
+        , com inspeção de tráfego e prevenção de intrusão.
+       </td>
+      </tr>
+     </table>
+     <div class="trap">
+      <b>
+       Armadilha:
+      </b>
+      “stateful, no nível da instância” é sempre
+      <b>
+       grupo de segurança
+      </b>
+      . WAF e Network Firewall são firewalls, mas não atuam na instância.
+     </div>
+     <details class="exercise">
+      <summary>
+       Qual recurso permite bloquear um endereço IP específico em uma sub-rede?
+      </summary>
+      <div class="opts">
+       A) Grupo de segurança · B) Network ACL · C) AWS Shield · D) Amazon GuardDuty
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — Network ACL.
+       </b>
+       Tem regras de negar; o grupo de segurança só permite.
+      </div>
+     </details>
+    </section>
+    <section id="conectar">
+     <h2>
+      2. Como conectar redes
+     </h2>
+     <table>
+      <tr>
+       <th>
+        Serviço
+       </th>
+       <th>
+        Para quê
+       </th>
+       <th>
+        Palavra-âncora
+       </th>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         VPC Peering
+        </b>
+       </td>
+       <td>
+        Liga
+        <b>
+         duas
+        </b>
+        VPCs diretamente. Não é transitivo.
+       </td>
+       <td>
+        “duas VPCs”
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Transit Gateway
+        </b>
+       </td>
+       <td>
+        <b>
+         Hub central
+        </b>
+        que liga muitas VPCs e redes on-premises.
+       </td>
+       <td>
+        “dezenas de VPCs”, “hub”, “simplificar”
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Site-to-Site VPN
+        </b>
+       </td>
+       <td>
+        Túnel
+        <b>
+         criptografado pela internet
+        </b>
+        entre o data center e a AWS.
+       </td>
+       <td>
+        “rápido de configurar”, “pela internet”
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <b>
+         AWS Direct Connect
+        </b>
+       </td>
+       <td>
+        Conexão
+        <b>
+         física dedicada
+        </b>
+        , que não passa pela internet.
+       </td>
+       <td>
+        “dedicada”, “latência estável”
+       </td>
+      </tr>
+     </table>
+     <div class="analogy">
+      <div class="lbl">
+       ANALOGIA
+      </div>
+      <p>
+       Peering é uma ponte entre duas cidades. Com 30 cidades, construir ponte entre todas vira um caos: o Transit Gateway é o aeroporto central onde todos os voos se conectam.
+      </p>
+     </div>
+     <details class="exercise">
+      <summary>
+       Uma empresa tem 40 VPCs e quer conectá-las sem gerenciar dezenas de conexões ponto a ponto. Qual serviço?
+      </summary>
+      <div class="opts">
+       A) VPC Peering · B) AWS Transit Gateway · C) AWS Direct Connect · D) Amazon Route 53
+      </div>
+      <div class="answer">
+       <b class="ok">
+        B — AWS Transit Gateway.
+       </b>
+       Um hub central para todas as VPCs.
+      </div>
+     </details>
+     <span class="src">
+      Baseado na documentação oficial da AWS
+     </span>
+    </section>
+   </div>
+   <div class="wrap">
+    <div class="eyebrow">
+     Guia Adicional AWS
+    </div>
+    <h1>
+     Guia Simplificado: Descomplicando a Infraestrutura
+    </h1>
+    <p class="doc-sub">
+     Resumo detalhado dos principais serviços.
+    </p>
+    <section id="guia-seguranca">
+     <h2>
+      10. Segurança e Proteção (O "Clean Code" da AWS)
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Criptografia S3
+       </h4>
+       <div class="anchor">
+        DADOS EM REPOUSO
+       </div>
+       <div class="q">
+        "Proteger arquivos guardados"
+       </div>
+       <p>
+        <b>
+         SSE-S3:
+        </b>
+        AWS gera a chave transparente.
+        <br/>
+        <b>
+         SSE-KMS:
+        </b>
+        Permite definir quem pode usar a chave e auditar o uso.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Firewalls
+       </h4>
+       <div class="anchor">
+        PROTEÇÃO
+       </div>
+       <div class="q">
+        "Bloquear ataques"
+       </div>
+       <p>
+        <b>
+         Security Groups:
+        </b>
+        Na instância (IPs/portas).
+        <br/>
+        <b>
+         WAF:
+        </b>
+        Na aplicação (HTTP, XSS).
+        <br/>
+        <b>
+         Shield:
+        </b>
+        Protege contra ataques DDoS.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Monitorização
+       </h4>
+       <div class="anchor">
+        AUDITORIA
+       </div>
+       <div class="q">
+        "Rastrear histórico"
+       </div>
+       <p>
+        <b>
+         Config:
+        </b>
+        O 'Git' da infraestrutura.
+        <br/>
+        <b>
+         VPC Flow Logs:
+        </b>
+        O gravador de rede.
+        <br/>
+        <b>
+         Artifact:
+        </b>
+        Portal para baixar certificações.
+       </p>
+      </div>
+     </div>
+    </section>
+    <section id="guia-redes">
+     <h2>
+      11. Redes e Distribuição Global
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Interligar Redes
+       </h4>
+       <div class="anchor">
+        CONEXÃO
+       </div>
+       <div class="q">
+        "Comunicação privada"
+       </div>
+       <p>
+        <b>
+         VPC Peering:
+        </b>
+        Cabo esticado entre duas VPCs (não transitivo).
+        <br/>
+        <b>
+         Transit Gateway:
+        </b>
+        Hub central que liga várias VPCs e On-Premises.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Distribuição
+       </h4>
+       <div class="anchor">
+        LATÊNCIA E REDE
+       </div>
+       <div class="q">
+        "Mais rápido para o cliente"
+       </div>
+       <p>
+        <b>
+         CloudFront:
+        </b>
+        Faz cache estático (CDN).
+        <br/>
+        <b>
+         Global Accelerator:
+        </b>
+        Usa a rede dedicada da AWS para IPs estáticos e failover rápido.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        HPC
+       </h4>
+       <div class="anchor">
+        ALTO DESEMPENHO
+       </div>
+       <div class="q">
+        "Processar big data"
+       </div>
+       <p>
+        <b>
+         Elastic Fabric Adapter (EFA):
+        </b>
+        Adaptador de rede para instâncias que precisam de latência baixíssima.
+       </p>
+      </div>
+     </div>
+    </section>
+    <section id="guia-armazenamento">
+     <h2>
+      12. Armazenamento e Nuvem Híbrida
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Híbrido
+       </h4>
+       <div class="anchor">
+        LOCAL E NUVEM
+       </div>
+       <div class="q">
+        "Dados físicos e na AWS"
+       </div>
+       <p>
+        <b>
+         Storage Gateway:
+        </b>
+        Integração S3 com disco local (ex: cache).
+        <br/>
+        <b>
+         Outposts:
+        </b>
+        Racks físicos da AWS dentro da sua empresa.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Snow Family
+       </h4>
+       <div class="anchor">
+        TRANSFERÊNCIA OFFLINE
+       </div>
+       <div class="q">
+        "Navio sem internet"
+       </div>
+       <p>
+        Dispositivos físicos (como o Snowball) para migrar dados fisicamente por correio para a AWS.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Integração SaaS
+       </h4>
+       <div class="anchor">
+        APLICATIVOS DE TERCEIROS
+       </div>
+       <div class="q">
+        "Slack e Salesforce"
+       </div>
+       <p>
+        <b>
+         Amazon AppFlow:
+        </b>
+        Transfere dados seguros entre a AWS e apps SaaS.
+       </p>
+      </div>
+     </div>
+    </section>
+    <section id="guia-gestao">
+     <h2>
+      13. Gestão, Custos e Otimização
+     </h2>
+     <div class="grid">
+      <div class="card amber">
+       <h4>
+        Custos e Faturamento
+       </h4>
+       <div class="anchor">
+        FINANÇAS
+       </div>
+       <div class="q">
+        "Fatura consolidada"
+       </div>
+       <p>
+        <b>
+         Organizations:
+        </b>
+        Gere contas e políticas (SCPs).
+        <br/>
+        <b>
+         Cost Explorer:
+        </b>
+        Painel financeiro visual.
+       </p>
+      </div>
+      <div class="card blue">
+       <h4>
+        Consultores
+       </h4>
+       <div class="anchor">
+        OTIMIZAÇÃO
+       </div>
+       <div class="q">
+        "Melhorar arquitetura"
+       </div>
+       <p>
+        <b>
+         Trusted Advisor:
+        </b>
+        Custos, segurança e limites (visão geral).
+        <br/>
+        <b>
+         Compute Optimizer:
+        </b>
+        Sugere tamanho de EC2 com Machine Learning.
+       </p>
+      </div>
+      <div class="card violet">
+       <h4>
+        Migração
+       </h4>
+       <div class="anchor">
+        ESTIMATIVAS LOCAIS
+       </div>
+       <div class="q">
+        "Antes de ir pra nuvem"
+       </div>
+       <p>
+        <b>
+         Application Discovery:
+        </b>
+        Instala no servidor e rastreia.
+        <br/>
+        <b>
+         Migration Evaluator:
+        </b>
+        Fornece TCO estimado do data center.
+       </p>
+      </div>
+     </div>
+    </section>
+   </div>
+  </main>
+  <script>
+   // Scroll-spy: destaca na sidebar a seção visível.
+  const links = [...document.querySelectorAll('.toc-list a')];
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => s && obs.observe(s));
+  </script>
+ </body>
+</html>

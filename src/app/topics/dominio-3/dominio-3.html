@@ -1,0 +1,162 @@
+<section id="dominio-3">
+  <h2>Domínio 3: Tecnologia e Serviços AWS (34%)</h2>
+
+  <h3>3.1 Infraestrutura Global da AWS</h3>
+  <ul>
+    <li>
+      <b>Regiões:</b> Localizações geográficas físicas ao redor do mundo compostas por um
+      agrupamento de Zonas de Disponibilidade isoladas.
+    </li>
+    <li>
+      <b>Zonas de Disponibilidade (AZs):</b> Um ou mais data centers distintos, com energia,
+      resfriamento e segurança física independentes, conectados por rede de altíssima velocidade e
+      baixíssima latência dentro de uma Região.
+    </li>
+    <li>
+      <b>Localizações de Borda (<i>Edge Locations / Points of Presence</i>):</b> Data centers
+      menores espalhados pelo mundo usados por serviços como CloudFront e Route 53 para armazenar
+      conteúdo em cache próximo aos usuários.
+    </li>
+  </ul>
+
+  <h3>3.2 Serviços de Computação</h3>
+  <ul>
+    <li>
+      <b>Amazon EC2 (Elastic Compute Cloud):</b> Servidores virtuais escaláveis e reconfiguráveis na
+      nuvem.
+    </li>
+    <li>
+      <b>AWS Lambda:</b> Serviço de computação <i>Serverless</i> que executa código em resposta a
+      eventos sem necessidade de provisionar ou gerenciar servidores.
+    </li>
+    <li>
+      <b>AWS Elastic Beanstalk:</b> Serviço de Plataforma como Serviço (PaaS) para rápida
+      implantação e gerenciamento de aplicações web sem preocupação com a infraestrutura subjacente.
+    </li>
+    <li>
+      <b>Containers AWS:</b>
+      <ul>
+        <li>
+          <b>Amazon ECS (Elastic Container Service):</b> Serviço de orquestração de contêineres
+          Docker nativo da AWS.
+        </li>
+        <li>
+          <b>Amazon EKS (Elastic Kubernetes Service):</b> Serviço gerenciado de Kubernetes para
+          executar e orquestrar contêineres.
+        </li>
+        <li>
+          <b>AWS Fargate:</b> Engine computacional <i>Serverless</i> para ECS e EKS, eliminando a
+          gestão de nós/servidores virtuais.
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>3.3 Serviços de Armazenamento</h3>
+  <ul>
+    <li>
+      <b>Amazon S3 (Simple Storage Service):</b> Armazenamento de objetos ilimitado, escalável e de
+      altíssima durabilidade (99.999999999% / 11 noves).
+      <ul>
+        <li>
+          <i>Classes de Armazenamento:</i> S3 Standard, S3 Intelligent-Tiering (otimização de custos
+          automatizada), S3 Standard-IA (acesso infrequente), S3 One Zone-IA e S3 Glacier
+          (arquivamento de longo prazo).
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>Amazon EBS (Elastic Block Store):</b> Armazenamento em bloco de alto desempenho projetado
+      para ser anexado a instâncias EC2 (funciona como um disco rígido virtual).
+    </li>
+    <li>
+      <b>Amazon EFS (Elastic File System):</b> Sistema de arquivos de rede (NFS) totalmente
+      gerenciado, escalável e compartilhável simultaneamente entre centenas de instâncias EC2.
+    </li>
+    <li>
+      <b>AWS Storage Gateway:</b> Serviço híbrido que conecta ambientes locais (<i>on-premises</i>)
+      ao armazenamento na nuvem AWS.
+    </li>
+  </ul>
+
+  <h3>3.4 Serviços de Bancos de Dados</h3>
+  <ul>
+    <li>
+      <b>Amazon RDS (Relational Database Service):</b> Banco de dados relacional gerenciado que
+      suporta mecanismos como MySQL, PostgreSQL, MariaDB, Oracle e SQL Server.
+    </li>
+    <li>
+      <b>Amazon Aurora:</b> Banco de dados relacional de alto desempenho construído para a nuvem
+      pela AWS, totalmente compatível com MySQL e PostgreSQL.
+    </li>
+    <li>
+      <b>Amazon DynamoDB:</b> Banco de dados NoSQL do tipo chave-valor totalmente gerenciado, sem
+      servidor (<i>Serverless</i>), com latência na casa dos milissegundos.
+    </li>
+    <li>
+      <b>Amazon Redshift:</b> Serviço de <i>Data Warehouse</i> em escala petabyte para análise
+      avançada de dados (<i>Business Intelligence</i>).
+    </li>
+    <li>
+      <b>Amazon ElastiCache:</b> Serviço de cache em memória (Redis ou Memcached) para aceleração de
+      leitura de aplicações.
+    </li>
+  </ul>
+
+  <h3>3.5 Redes e Entrega de Conteúdo</h3>
+  <ul>
+    <li>
+      <b>Amazon VPC (Virtual Private Cloud):</b> Rede virtual isolada e dedicada à sua conta na AWS.
+      <ul>
+        <li>
+          <i>Subnets (Sub-redes):</i> Divisões de uma VPC. Podem ser <b>Públicas</b> (com acesso
+          direto à internet) ou <b>Privadas</b> (sem acesso direto externo).
+        </li>
+        <li>
+          <i>Internet Gateway (IGW):</i> Componente de VPC que permite comunicação entre instâncias
+          da sub-rede pública e a internet.
+        </li>
+        <li>
+          <i>Security Groups:</i> Firewall virtual de nível de instância (com estado /
+          <i>stateful</i>).
+        </li>
+        <li>
+          <i>Network ACLs (NACL):</i> Firewall virtual de nível de sub-rede (sem estado /
+          <i>stateless</i>).
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>Amazon Route 53:</b> Serviço de DNS (<i>Domain Name System</i>) altamente disponível e
+      escalável, e gerenciador de domínios.
+    </li>
+    <li>
+      <b>Amazon CloudFront:</b> Rede de Entrega de Conteúdo (CDN) global que acelera a distribuição
+      de arquivos estáticos e dinâmicos aproximando o conteúdo do usuário final.
+    </li>
+    <li>
+      <b>AWS Direct Connect:</b> Estabelece uma conexão de rede dedicada e privada entre o data
+      center físico do cliente e a AWS, evitando a internet pública.
+    </li>
+  </ul>
+
+  <h3>3.6 Integração e Ferramentas Adicionais</h3>
+  <ul>
+    <li>
+      <b>Amazon SQS (Simple Queue Service):</b> Serviço de filas de mensagens gerenciado para
+      desacoplamento de microsserviços.
+    </li>
+    <li>
+      <b>Amazon SNS (Simple Notification Service):</b> Serviço de publicação/assinatura (Pub/Sub)
+      para envio de notificações por SMS, e-mail e push.
+    </li>
+    <li>
+      <b>AWS EventBridge:</b> Barramento de eventos <i>Serverless</i> para conectar aplicações
+      usando dados de suas próprias aplicações ou serviços AWS.
+    </li>
+    <li>
+      <b>Amazon Athena:</b> Serviço de consulta interativa que permite analisar dados armazenados no
+      Amazon S3 diretamente usando SQL padrão.
+    </li>
+  </ul>
+</section>

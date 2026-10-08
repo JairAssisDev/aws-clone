@@ -1,0 +1,52 @@
+<section id="gerenciado">
+  <h2>1. Banco gerenciado (RDS) x banco instalado no EC2</h2>
+  <p class="lead">A primeira decisão: quem cuida do banco de dados, você ou a AWS?</p>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Amazon RDS</h4>
+      <div class="anchor">A AWS CUIDA</div>
+      <div class="q">"Quero um banco relacional sem administrar servidor?"</div>
+      <p>
+        Banco relacional <b>gerenciado</b> (MySQL, PostgreSQL, MariaDB, Oracle, SQL Server). A AWS
+        faz instalação, patches, backups automáticos e Multi-AZ. Você cuida do esquema, das
+        consultas e dos dados.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Banco no Amazon EC2</h4>
+      <div class="anchor">VOCÊ CUIDA</div>
+      <div class="q">"Preciso de controle total do sistema operacional?"</div>
+      <p>
+        Você instala o banco em uma instância EC2 e cuida de <b>tudo</b>: sistema operacional,
+        patches, backups e alta disponibilidade. Só faz sentido quando precisa de algo que o RDS não
+        permite.
+      </p>
+    </div>
+  </div>
+
+  <div class="analogy">
+    <div class="lbl">ANALOGIA</div>
+    <p>
+      RDS é morar em um apartamento com condomínio: a manutenção do prédio é feita por outros. Banco
+      no EC2 é ter uma casa: você mesmo conserta o telhado.
+    </p>
+  </div>
+
+  <div class="trap">
+    <b>Armadilha:</b> se o enunciado fala em <b>reduzir trabalho administrativo</b>, "patches
+    automáticos" ou "backups automáticos" de um banco relacional, a resposta é <b>RDS</b> (ou
+    Aurora), nunca "instâncias EC2".
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer migrar um banco MySQL e deixar de fazer manualmente patches e backups. Qual
+      serviço deve usar?
+    </summary>
+    <div class="opts">A) Amazon EC2 · B) Amazon RDS · C) Amazon S3 · D) Amazon Redshift</div>
+    <div class="answer">
+      <b class="ok">B — Amazon RDS.</b>
+      Banco relacional gerenciado: patches e backups ficam com a AWS.
+    </div>
+  </details>
+</section>

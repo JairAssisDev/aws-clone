@@ -1,0 +1,69 @@
+<section id="firewalls">
+  <h2>1. Quem filtra o tráfego</h2>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Grupo de segurança</h4>
+      <div class="anchor">INSTÂNCIA · STATEFUL</div>
+      <div class="q">"Firewall da instância EC2?"</div>
+      <p>
+        Atua na <b>instância</b>. É <b>stateful</b>: se a entrada foi permitida, a resposta sai
+        sozinha. Só tem regras de <b>permitir</b>.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Network ACL</h4>
+      <div class="anchor">SUB-REDE · STATELESS</div>
+      <div class="q">"Filtrar uma sub-rede inteira ou bloquear um IP?"</div>
+      <p>
+        Atua na <b>sub-rede</b>. É <b>stateless</b>: entrada e saída precisam de regras. Tem regras
+        de <b>permitir e negar</b>.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>AWS WAF</h4>
+      <div class="anchor">APLICAÇÃO WEB (HTTP)</div>
+      <div class="q">"Bloquear injeção de SQL ou XSS?"</div>
+      <p>
+        Firewall de <b>aplicação web</b>: filtra requisições HTTP/HTTPS no CloudFront, ALB ou API
+        Gateway.
+      </p>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Serviço</th>
+      <th>Protege contra</th>
+    </tr>
+    <tr>
+      <td><b>AWS Shield</b></td>
+      <td>
+        Ataques <b>DDoS</b>. Standard é automático e gratuito; Advanced é pago, com proteção e
+        suporte extras.
+      </td>
+    </tr>
+    <tr>
+      <td><b>AWS Network Firewall</b></td>
+      <td>
+        Firewall gerenciado para a <b>VPC inteira</b>, com inspeção de tráfego e prevenção de
+        intrusão.
+      </td>
+    </tr>
+  </table>
+
+  <div class="trap">
+    <b>Armadilha:</b> "stateful, no nível da instância" é sempre <b>grupo de segurança</b>. WAF e
+    Network Firewall são firewalls, mas não atuam na instância.
+  </div>
+
+  <details class="exercise">
+    <summary>Qual recurso permite bloquear um endereço IP específico em uma sub-rede?</summary>
+    <div class="opts">
+      A) Grupo de segurança · B) Network ACL · C) AWS Shield · D) Amazon GuardDuty
+    </div>
+    <div class="answer">
+      <b class="ok">B — Network ACL.</b>
+      Tem regras de negar; o grupo de segurança só permite.
+    </div>
+  </details>
+</section>

@@ -1,0 +1,156 @@
+<section id="wa">
+  <h2>3. Pilares do AWS Well-Architected Framework</h2>
+  <p class="lead">
+    Foi o tema com mais erros. O Framework tem <b>6 pilares</b>. Três deles foram confundidos entre
+    si:
+  </p>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Excelência Operacional</h4>
+      <div class="anchor">OPERAR E MELHORAR</div>
+      <div class="q">"Como eu executo, monitoro e melhoro meus processos?"</div>
+      <p>
+        Executar cargas de trabalho de forma eficiente, <b>reduzir a sobrecarga operacional</b>,
+        automatizar, fazer mudanças pequenas e reversíveis, aprender com falhas. Palavras típicas:
+        <i>processos, operações, observabilidade, automação</i>.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Confiabilidade</h4>
+      <div class="anchor">FUNCIONAR SEMPRE</div>
+      <div class="q">"A carga funciona corretamente e de forma consistente quando esperado?"</div>
+      <p>
+        Definição oficial: a capacidade de uma carga de trabalho
+        <b>executar sua função corretamente e de forma consistente</b> ao longo de todo o ciclo de
+        vida. Inclui <b>resiliência</b>: recuperar-se de falhas.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>Eficiência de Performance</h4>
+      <div class="anchor">USAR BEM OS RECURSOS</div>
+      <div class="q">"Estou usando os recursos certos para ter o melhor desempenho?"</div>
+      <p>
+        Selecionar o tipo e tamanho certo de recurso e manter a eficiência quando a demanda muda.
+        Palavras típicas:
+        <i>serverless, experimentar, global em minutos, tecnologias avançadas como serviço</i>.
+      </p>
+    </div>
+  </div>
+  <p>
+    Os outros três: <b>Segurança</b> (proteger dados e sistemas),
+    <b>Otimização de Custos</b> (evitar gastos desnecessários) e <b>Sustentabilidade</b> (reduzir o
+    impacto ambiental).
+  </p>
+
+  <h3>Princípios de design: qual pertence a qual pilar</h3>
+  <table>
+    <tr>
+      <th>Princípio de design</th>
+      <th>Pilar</th>
+    </tr>
+    <tr>
+      <td>Usar arquiteturas <b>serverless</b></td>
+      <td>Eficiência de Performance</td>
+    </tr>
+    <tr>
+      <td>Tornar-se global em minutos · Experimentar com mais frequência</td>
+      <td>Eficiência de Performance</td>
+    </tr>
+    <tr>
+      <td><b>Escalar horizontalmente</b> para aumentar a disponibilidade agregada</td>
+      <td>Confiabilidade</td>
+    </tr>
+    <tr>
+      <td>Recuperar-se automaticamente de falhas · Testar procedimentos de recuperação</td>
+      <td>Confiabilidade</td>
+    </tr>
+    <tr>
+      <td>Fazer mudanças pequenas, frequentes e reversíveis · Automatizar com segurança</td>
+      <td>Excelência Operacional</td>
+    </tr>
+    <tr>
+      <td>Medir a eficiência geral / o custo das cargas de trabalho</td>
+      <td>Otimização de Custos</td>
+    </tr>
+  </table>
+
+  <h3>Resiliência, durabilidade, elasticidade, latência</h3>
+  <table>
+    <tr>
+      <th>Conceito</th>
+      <th>Significa</th>
+    </tr>
+    <tr>
+      <td><b>Resiliência</b></td>
+      <td>
+        O <b>sistema</b> continua funcionando (e se recupera) quando enfrenta falhas ou problemas
+        operacionais.
+      </td>
+    </tr>
+    <tr>
+      <td>Durabilidade</td>
+      <td>
+        Os <b>dados</b> não se perdem ao longo do tempo (ex.: 11 noves do S3). É sobre dados, não
+        sobre o sistema.
+      </td>
+    </tr>
+    <tr>
+      <td>Elasticidade</td>
+      <td>Aumentar e reduzir recursos automaticamente conforme a demanda.</td>
+    </tr>
+    <tr>
+      <td>Latência</td>
+      <td>Tempo de resposta. Métrica de desempenho, não de continuidade.</td>
+    </tr>
+  </table>
+
+  <div class="trap">
+    <b>Armadilha:</b> "funcionar corretamente e de forma consistente" parece "operação", mas é a
+    definição literal de <b>Confiabilidade</b>. Já "reduzir a sobrecarga operacional e melhorar
+    processos" é <b>Excelência Operacional</b>.
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer que sua aplicação continue disponível mesmo que uma Zona de Disponibilidade
+      inteira falhe, recuperando-se automaticamente. Qual pilar representa esse objetivo?
+    </summary>
+    <div class="opts">
+      A) Excelência Operacional · B) Confiabilidade · C) Eficiência de Performance · D)
+      Sustentabilidade
+    </div>
+    <div class="answer">
+      <b class="ok">B — Confiabilidade.</b>
+      Recuperar-se de falhas e manter a carga funcionando é resiliência, parte do pilar
+      Confiabilidade.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Uma equipe quer implementar observabilidade, automatizar as implantações e aprender com cada
+      incidente para melhorar os procedimentos. Qual pilar?
+    </summary>
+    <div class="opts">
+      A) Segurança · B) Otimização de Custos · C) Excelência Operacional · D) Confiabilidade
+    </div>
+    <div class="answer">
+      <b class="ok">C — Excelência Operacional.</b>
+      Operar, monitorar e melhorar processos continuamente.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>Qual princípio de design está alinhado com o pilar Eficiência de Performance?</summary>
+    <div class="opts">
+      A) Escalar horizontalmente · B) Usar arquiteturas serverless · C) Testar procedimentos de
+      recuperação · D) Analisar e atribuir gastos
+    </div>
+    <div class="answer">
+      <b class="ok">B — Usar arquiteturas serverless.</b>
+      A (escalar horizontalmente) e C são de Confiabilidade; D é de Otimização de Custos.
+    </div>
+  </details>
+
+  <span class="src">Baseado na documentação oficial da AWS (AWS Well-Architected Framework)</span>
+</section>

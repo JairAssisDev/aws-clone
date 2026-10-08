@@ -1,0 +1,66 @@
+<section id="mover">
+  <h2>2. Na migração: mover</h2>
+  <table>
+    <tr>
+      <th>Serviço</th>
+      <th>Move o quê</th>
+    </tr>
+    <tr>
+      <td><b>AWS Application Migration Service</b></td>
+      <td><b>Servidores</b> inteiros para EC2 (rehost / lift-and-shift).</td>
+    </tr>
+    <tr>
+      <td><b>AWS Database Migration Service (DMS)</b></td>
+      <td><b>Bancos de dados</b>, com o banco de origem funcionando durante a migração.</td>
+    </tr>
+    <tr>
+      <td><b>AWS DataSync</b></td>
+      <td><b>Arquivos</b>, pela rede.</td>
+    </tr>
+    <tr>
+      <td><b>AWS Snowball Edge</b></td>
+      <td>Grandes volumes de dados, <b>fisicamente</b>, quando falta rede.</td>
+    </tr>
+  </table>
+
+  <div class="quick">
+    <div class="lbl">TESTE RÁPIDO</div>
+    <p>
+      Custo → <b>Pricing Calculator / Migration Evaluator</b>. Inventário →
+      <b>Application Discovery</b>. Servidor → <b>Application Migration Service</b>. Banco →
+      <b>DMS</b>.
+    </p>
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer coletar dados de uso e configuração dos servidores do seu data center para
+      planejar a migração. Qual serviço?
+    </summary>
+    <div class="opts">
+      A) AWS DMS · B) AWS Application Discovery Service · C) AWS Pricing Calculator · D) AWS
+      DataSync
+    </div>
+    <div class="answer">
+      <b class="ok">B — Application Discovery Service.</b>
+      Faz o inventário dos servidores locais.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer estimar o TCO de migrar seus servidores para a AWS. Quais ferramentas?
+      (Escolha duas.)
+    </summary>
+    <div class="opts">
+      A) AWS Pricing Calculator · B) AWS Cost Explorer · C) Migration Evaluator · D) AWS Budgets ·
+      E) AWS DMS
+    </div>
+    <div class="answer">
+      <b class="ok">A e C.</b>
+      Cost Explorer e Budgets só funcionam com gastos que já existem na AWS.
+    </div>
+  </details>
+
+  <span class="src">Baseado na documentação oficial da AWS</span>
+</section>

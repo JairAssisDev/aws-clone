@@ -1,0 +1,139 @@
+<section id="dominio-1">
+  <h2>Domínio 1: Conceitos de Nuvem (24%)</h2>
+
+  <h3>1.1 O que é Computação em Nuvem?</h3>
+  <p>
+    A computação em nuvem é a entrega sob demanda de recursos de TI (como poder computacional,
+    armazenamento e bancos de dados) por meio da internet, com um modelo de pagamento conforme o uso
+    (<i>pay-as-you-go</i>).
+  </p>
+
+  <h4>Modelos de Implantação</h4>
+  <ul>
+    <li>
+      <b>Nuvem Pública:</b> A infraestrutura pertence a um provedor terceirizado (como a AWS) e é
+      compartilhada entre vários clientes via internet.
+    </li>
+    <li>
+      <b>Nuvem Privada:</b> A infraestrutura é dedicada exclusivamente a uma única organização,
+      hospedada em data center próprio (<i>on-premises</i>) ou de terceiros.
+    </li>
+    <li>
+      <b>Nuvem Híbrida:</b> Combina infraestrutura privada com nuvem pública, permitindo que dados e
+      aplicações sejam compartilhados entre ambas.
+    </li>
+  </ul>
+
+  <h4>Modelos de Serviço</h4>
+  <ul>
+    <li>
+      <b>IaaS (Infraestrutura como Serviço):</b> Fornece blocos básicos de construção de TI (rede,
+      computadores virtuais, espaço de armazenamento). Dá o maior nível de controle flexível.
+      <i>Exemplo AWS: Amazon EC2.</i>
+    </li>
+    <li>
+      <b>PaaS (Plataforma como Serviço):</b> Remove a necessidade de gerenciar a infraestrutura
+      subjacente (como sistema operacional ou patches) e permite focar na implantação e
+      gerenciamento de aplicações. <i>Exemplo AWS: AWS Elastic Beanstalk.</i>
+    </li>
+    <li>
+      <b>SaaS (Software como Serviço):</b> Fornece um produto completo operado e gerenciado pelo
+      provedor de serviços. <i>Exemplo AWS: Amazon WorkSpaces, Amazon Chime.</i>
+    </li>
+  </ul>
+
+  <h3>1.2 Vantagens da Nuvem AWS</h3>
+  <ol>
+    <li>
+      <b>Substituição de CAPEX por OPEX:</b> Troca despesas de capital (<i>Capital Expenditures</i>,
+      investimentos massivos em data centers físicos) por despesas operacionais (<i
+        >Operational Expenditures</i
+      >, custos variáveis de uso).
+    </li>
+    <li>
+      <b>Economias de Escala Massivas:</b> Como a AWS atende a centenas de milhares de clientes, ela
+      consegue alcançar preços mais baixos e repassar essa economia.
+    </li>
+    <li>
+      <b>Fim da Adivinhação de Capacidade:</b> Elimina o risco de ter capacidade ociosa ou
+      infraestrutura insuficiente; é possível escalar para cima ou para baixo instantaneamente.
+    </li>
+    <li>
+      <b>Aumento de Agilidade e Velocidade:</b> Recursos de TI ficam disponíveis em minutos com
+      poucos cliques, reduzindo o tempo de desenvolvimento.
+    </li>
+    <li>
+      <b>Foco no negócio:</b> Permite focar nas aplicações e clientes, sem gastar recursos com
+      manutenção e resfriamento de data centers.
+    </li>
+    <li>
+      <b>Implantação Global em Minutos:</b> Implante aplicações em múltiplas regiões do mundo em
+      poucos cliques, garantindo menor latência para os usuários.
+    </li>
+  </ol>
+
+  <h3>1.3 AWS Well-Architected Framework</h3>
+  <p>
+    Conjunto de boas práticas para projetar sistemas seguros, de alto desempenho, resilientes e
+    eficientes na nuvem AWS. É composto por <b>6 pilares</b>:
+  </p>
+  <ol>
+    <li>
+      <b>Excelência Operacional (<i>Operational Excellence</i>):</b> Capacidade de executar e
+      monitorar sistemas para entregar valor ao negócio e melhorar continuamente os processos de
+      suporte.
+    </li>
+    <li>
+      <b>Segurança (<i>Security</i>):</b> Foco em proteger dados, sistemas e ativos, aproveitando
+      tecnologias de nuvem para melhorar a postura de segurança.
+    </li>
+    <li>
+      <b>Confiabilidade (<i>Reliability</i>):</b> Garantir que uma carga de trabalho execute suas
+      funções corretamente e se recupere automaticamente de falhas de infraestrutura ou
+      interrupções.
+    </li>
+    <li>
+      <b>Eficiência de Desempenho (<i>Performance Efficiency</i>):</b> Uso eficiente de recursos
+      computacionais para atender aos requisitos do sistema à medida que a demanda muda e a
+      tecnologia evolui.
+    </li>
+    <li>
+      <b>Otimização de Custos (<i>Cost Optimization</i>):</b> Capacidade de executar sistemas para
+      entregar valor de negócio pelo menor preço possível.
+    </li>
+    <li>
+      <b>Sustentabilidade (<i>Sustainability</i>):</b> Minimizar os impactos ambientais na execução
+      de cargas de trabalho na nuvem.
+    </li>
+  </ol>
+
+  <h3>1.4 Estratégias de Migração e Transformação</h3>
+  <ul>
+    <li>
+      <b>AWS Cloud Adoption Framework (AWS CAF):</b> Estrutura desenvolvida para ajudar organizações
+      a criarem e executarem um plano eficiente de transformação digital. Organizado em 6
+      perspectivas: <i>Business, People, Governance, Platform, Security e Operations</i>.
+    </li>
+    <li>
+      <b>Estratégias de Migração (Os 7 Rs):</b>
+      <ol>
+        <li><i>Rehost</i> (Lift and Shift): Mover sem alterações na aplicação.</li>
+        <li>
+          <i>Replatform</i> (Lift, Tinker, and Shift): Fazer otimizações mínimas sem alterar a
+          arquitetura principal.
+        </li>
+        <li>
+          <i>Refactor / Re-architect:</i> Reescrever a aplicação para aproveitar recursos nativos de
+          nuvem (como arquiteturas Serverless).
+        </li>
+        <li><i>Repurchase:</i> Trocar a aplicação existente por uma solução SaaS comercial.</li>
+        <li><i>Retain:</i> Manter aplicações na infraestrutura atual por enquanto.</li>
+        <li><i>Retire:</i> Desativar aplicações desnecessárias.</li>
+        <li>
+          <i>Relocate:</i> Mover infraestrutura sem impacto operacional (ex: migrar máquinas VMware
+          usando AWS Outposts ou VMware Cloud on AWS).
+        </li>
+      </ol>
+    </li>
+  </ul>
+</section>

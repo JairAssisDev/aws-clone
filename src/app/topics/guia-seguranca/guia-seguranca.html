@@ -1,0 +1,39 @@
+<section id="guia-seguranca">
+  <h2>10. Segurança e Proteção (O "Clean Code" da AWS)</h2>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Criptografia S3</h4>
+      <div class="anchor">DADOS EM REPOUSO</div>
+      <div class="q">"Proteger arquivos guardados"</div>
+      <p>
+        <b>SSE-S3:</b> AWS gera a chave transparente.
+        <br />
+        <b>SSE-KMS:</b> Permite definir quem pode usar a chave e auditar o uso.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Firewalls</h4>
+      <div class="anchor">PROTEÇÃO</div>
+      <div class="q">"Bloquear ataques"</div>
+      <p>
+        <b>Security Groups:</b> Na instância (IPs/portas).
+        <br />
+        <b>WAF:</b> Na aplicação (HTTP, XSS).
+        <br />
+        <b>Shield:</b> Protege contra ataques DDoS.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>Monitorização</h4>
+      <div class="anchor">AUDITORIA</div>
+      <div class="q">"Rastrear histórico"</div>
+      <p>
+        <b>Config:</b> O 'Git' da infraestrutura.
+        <br />
+        <b>VPC Flow Logs:</b> O gravador de rede.
+        <br />
+        <b>Artifact:</b> Portal para baixar certificações.
+      </p>
+    </div>
+  </div>
+</section>

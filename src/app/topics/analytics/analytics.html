@@ -1,0 +1,75 @@
+<section id="analytics">
+  <h2>3. Analytics: consultar e analisar dados</h2>
+  <p class="lead">
+    Aqui o objetivo não é a aplicação gravar dados, e sim <b>analisar</b> dados que já existem.
+  </p>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Amazon Athena</h4>
+      <div class="anchor">SQL DIRETO NO S3</div>
+      <div class="q">"Quero consultar arquivos no S3 sem carregar em banco?"</div>
+      <p>
+        Consultas SQL <b>serverless</b> direto sobre dados no Amazon S3. Não guarda dados e você
+        paga pelos dados escaneados em cada consulta.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>Amazon Redshift</h4>
+      <div class="anchor">DATA WAREHOUSE</div>
+      <div class="q">"Quero um armazém de dados para BI?"</div>
+      <p>
+        Data warehouse: <b>carrega e guarda</b> grandes volumes de dados organizados para consultas
+        analíticas complexas e relatórios.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>Amazon QuickSight</h4>
+      <div class="anchor">DASHBOARDS</div>
+      <div class="q">"Quero ver gráficos e painéis?"</div>
+      <p>
+        Serviço de BI para <b>visualizar</b> dados em painéis. Não consulta o S3 sozinho: usa fontes
+        como Athena ou Redshift.
+      </p>
+    </div>
+  </div>
+
+  <div class="trap">
+    <b>Armadilha:</b> "consultar dados no S3 <b>sem carregá-los</b> em um banco e
+    <b>sem provisionar</b> infraestrutura" é <b>Athena</b>. Redshift exige carregar os dados no data
+    warehouse; QuickSight só mostra os resultados.
+  </div>
+
+  <p>
+    Para comparar Athena, Redshift e EMR com mais detalhe, veja também a página
+    <i>athena-redshift-emr.html</i>.
+  </p>
+
+  <details class="exercise">
+    <summary>
+      Uma equipe quer executar SQL padrão sobre arquivos no Amazon S3, pagando apenas pelos dados
+      analisados em cada consulta. Qual serviço?
+    </summary>
+    <div class="opts">
+      A) Amazon Redshift · B) Amazon Athena · C) Amazon QuickSight · D) Amazon RDS
+    </div>
+    <div class="answer">
+      <b class="ok">B — Amazon Athena.</b>
+      SQL serverless direto no S3, cobrança por dados escaneados.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer criar painéis visuais para a diretoria com os dados de vendas. Qual serviço?
+    </summary>
+    <div class="opts">
+      A) Amazon QuickSight · B) Amazon Athena · C) Amazon Redshift · D) AWS Glue
+    </div>
+    <div class="answer">
+      <b class="ok">A — Amazon QuickSight.</b>
+      Painéis e gráficos de BI.
+    </div>
+  </details>
+
+  <span class="src">Baseado na documentação oficial da AWS</span>
+</section>

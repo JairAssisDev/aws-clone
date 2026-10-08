@@ -1,0 +1,17 @@
+<nav class="toc">
+  @for (group of reader.groups; track group.label) {
+    <div class="toc-group">{{ group.label }}</div>
+    <ul class="toc-list">
+      @for (item of group.items; track item.id) {
+        <li>
+          <a
+            [attr.href]="'#' + item.id"
+            [class.active]="reader.activeId() === item.id"
+            (click)="reader.select(item.id)"
+            >{{ item.title }}</a
+          >
+        </li>
+      }
+    </ul>
+  }
+</nav>

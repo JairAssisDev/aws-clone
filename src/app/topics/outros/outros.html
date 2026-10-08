@@ -1,0 +1,53 @@
+<section id="outros">
+  <h2>9. Elastic Load Balancing, CodeDeploy e armazenamento SMB</h2>
+  <div class="grid">
+    <div class="card amber">
+      <h4>Elastic Load Balancing</h4>
+      <div class="anchor">DISTRIBUIR TRÁFEGO</div>
+      <p>
+        Distribui o tráfego entre <b>vários recursos de computação</b> (instâncias, contêineres,
+        IPs). Quem <b>escala</b> as instâncias é o <b>Auto Scaling</b>, não o ELB.
+      </p>
+    </div>
+    <div class="card blue">
+      <h4>AWS CodeDeploy</h4>
+      <div class="anchor">IMPLANTAR</div>
+      <p>
+        Automatiza a implantação de software em <b>EC2, servidores on-premises</b>, Lambda e ECS.
+        CodePipeline orquestra o fluxo; CodeBuild compila e testa.
+      </p>
+    </div>
+    <div class="card violet">
+      <h4>Amazon FSx for Windows File Server</h4>
+      <div class="anchor">SMB / WINDOWS</div>
+      <p>
+        Sistema de arquivos gerenciado acessível via <b>SMB</b>. EFS usa <b>NFS</b> (Linux); EBS é
+        disco em blocos de uma instância; S3 é armazenamento de objetos.
+      </p>
+    </div>
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa quer automatizar a implantação de uma nova versão da aplicação em 20 servidores no
+      próprio data center e em 10 instâncias EC2. Qual serviço?
+    </summary>
+    <div class="opts">
+      A) AWS CodeCommit · B) AWS CodeBuild · C) AWS CodeDeploy · D) AWS CodeArtifact
+    </div>
+    <div class="answer">
+      <b class="ok">C — CodeDeploy.</b>
+      Implanta tanto em EC2 quanto em servidores on-premises.
+    </div>
+  </details>
+
+  <details class="exercise">
+    <summary>
+      Servidores Linux precisam compartilhar os mesmos arquivos ao mesmo tempo, usando NFS. E se
+      fossem servidores Windows usando SMB?
+    </summary>
+    <div class="answer">
+      <b class="ok">Linux/NFS → Amazon EFS. Windows/SMB → Amazon FSx for Windows File Server.</b>
+    </div>
+  </details>
+</section>

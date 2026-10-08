@@ -1,0 +1,54 @@
+<section id="conectar">
+  <h2>2. Como conectar redes</h2>
+  <table>
+    <tr>
+      <th>Serviço</th>
+      <th>Para quê</th>
+      <th>Palavra-âncora</th>
+    </tr>
+    <tr>
+      <td><b>VPC Peering</b></td>
+      <td>Liga <b>duas</b> VPCs diretamente. Não é transitivo.</td>
+      <td>"duas VPCs"</td>
+    </tr>
+    <tr>
+      <td><b>AWS Transit Gateway</b></td>
+      <td><b>Hub central</b> que liga muitas VPCs e redes on-premises.</td>
+      <td>"dezenas de VPCs", "hub", "simplificar"</td>
+    </tr>
+    <tr>
+      <td><b>AWS Site-to-Site VPN</b></td>
+      <td>Túnel <b>criptografado pela internet</b> entre o data center e a AWS.</td>
+      <td>"rápido de configurar", "pela internet"</td>
+    </tr>
+    <tr>
+      <td><b>AWS Direct Connect</b></td>
+      <td>Conexão <b>física dedicada</b>, que não passa pela internet.</td>
+      <td>"dedicada", "latência estável"</td>
+    </tr>
+  </table>
+
+  <div class="analogy">
+    <div class="lbl">ANALOGIA</div>
+    <p>
+      Peering é uma ponte entre duas cidades. Com 30 cidades, construir ponte entre todas vira um
+      caos: o Transit Gateway é o aeroporto central onde todos os voos se conectam.
+    </p>
+  </div>
+
+  <details class="exercise">
+    <summary>
+      Uma empresa tem 40 VPCs e quer conectá-las sem gerenciar dezenas de conexões ponto a ponto.
+      Qual serviço?
+    </summary>
+    <div class="opts">
+      A) VPC Peering · B) AWS Transit Gateway · C) AWS Direct Connect · D) Amazon Route 53
+    </div>
+    <div class="answer">
+      <b class="ok">B — AWS Transit Gateway.</b>
+      Um hub central para todas as VPCs.
+    </div>
+  </details>
+
+  <span class="src">Baseado na documentação oficial da AWS</span>
+</section>
